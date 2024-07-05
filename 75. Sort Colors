@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        vector<int>z;
+        vector<int>o;
+        vector<int>t;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==0){
+                z.push_back(nums[i]);
+            }
+            else if(nums[i]==1){
+                o.push_back(nums[i]);
+            }
+            else if(nums[i]==2){
+                t.push_back(nums[i]);
+            }
+        }
+        nums.clear();
+        nums.insert(nums.begin(),z.begin(),z.end());
+        nums.insert(nums.end(),o.begin(),o.end());
+        nums.insert(nums.end(),t.begin(),t.end());
+    }
+};
