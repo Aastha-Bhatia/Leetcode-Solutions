@@ -1,0 +1,8 @@
+class Solution {
+public:
+    vector<int> getConcatenation(vector<int>& nums) {
+        vector<int> combined(nums.begin(),nums.end());
+        combined.insert(combined.end(),nums.begin(),nums.end());
+    return combined;
+    }
+};  
