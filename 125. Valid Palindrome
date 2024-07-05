@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int b=1;
+        int leng=s.length();
+        string a;
+       for(int i=0;i<leng;i++){
+        if(!isalnum(s[i])){
+            continue;
+        }
+        a.push_back(tolower(s[i]));
+       } 
+       int leng2=a.length();
+       for(int i=0;i<leng2/2;i++){
+        if(a[i]==a[leng2-i-1]){
+            continue;
+        }
+        else{
+            b=0;
+            break;
+        }
+       }
+    return b;
+    }
+};
