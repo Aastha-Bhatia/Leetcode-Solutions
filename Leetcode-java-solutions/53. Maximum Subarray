@@ -1,0 +1,96 @@
+//we can use any of the three approaches, kedanes has the best time complexity. 
+
+// class Solution {
+//     public int maxSubArray(int[] nums) {
+//       // i am using bruteforce first
+//       int maxsum=Integer.MIN_VALUE;
+//       for(int i=0;i<nums.length;i++){
+//         int start=i;
+//         for(int j=i;j<nums.length;j++){
+//             int end=j;
+//             int sum=0;
+//             for(int k=start;k<=end;k++){
+//                 sum+=nums[k];
+//             }
+//             if(sum>maxsum){
+//                 maxsum=sum;
+//             }
+//         }
+
+//       }  
+//     return maxsum;}
+// }
+
+// class Solution {
+//     public int maxSubArray(int[] nums){
+//       // i am using prefixsum now
+//       int maxsum=Integer.MIN_VALUE;
+//       int prefixsum[]=new int[nums.length];
+//       prefixsum[0]=nums[0];
+//       for(int i=1;i<nums.length;i++){
+//         prefixsum[i]=prefixsum[i-1]+nums[i];
+//       }
+//       for(int i=0;i<nums.length;i++){
+//         int start=i;
+//         for(int j=i;j<nums.length;j++){
+//             int end=j;
+//             int currentsum=start==0?prefixsum[end]:prefixsum[end]-prefixsum[start-1];
+//             maxsum=Math.max(maxsum,currentsum);
+//         }
+//       }  
+//     return maxsum;
+//     }
+// }
+
+// class Solution {
+//     public int maxSubArray(int[] nums) {
+//       // i am using bruteforce first
+//       int maxsum=Integer.MIN_VALUE;
+//       for(int i=0;i<nums.length;i++){
+//         int start=i;
+//         for(int j=i;j<nums.length;j++){
+//             int end=j;
+//             int sum=0;
+//             for(int k=start;k<=end;k++){
+//                 sum+=nums[k];
+//             }
+//             if(sum>maxsum){
+//                 maxsum=sum;
+//             }
+//         }
+
+//       }  
+//     return maxsum;}
+// }
+
+class Solution {
+    public int maxSubArray(int[] nums){
+      // i am using kedanes now
+      int currentsum=0;
+      int maxsum=Integer.MIN_VALUE;
+      boolean allnegative=true;
+      int maxnegative=nums[0];
+      for(int i=0;i<nums.length;i++){
+        if(nums[i]>0){
+            allnegative=false;
+            break;
+        }
+        if(nums[i]>maxnegative){
+            maxnegative=nums[i];
+        }
+      }
+      if(allnegative){
+        return maxnegative;
+      }
+      else{
+        for(int i=0;i<nums.length;i++){
+            currentsum=currentsum+nums[i];
+            if(currentsum<0){
+                currentsum=0;
+            }
+            maxsum=Math.max(currentsum,maxsum);
+        }
+        return maxsum;
+    }
+}
+}
