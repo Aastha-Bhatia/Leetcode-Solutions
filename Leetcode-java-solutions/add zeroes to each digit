@@ -1,0 +1,26 @@
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Try programiz.pro");
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int sum=0;
+        int answer;
+        int multiplier=1;
+        
+        while(n>0){
+            int last=n%10;
+            if(last==9){
+                answer=0;
+            }
+            else{
+                answer=last+1;
+            }
+            sum+=answer*multiplier;
+            multiplier*=10;
+            n=n/10;
+        }
+        System.out.print(sum);
+    }
+    
+}
