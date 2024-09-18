@@ -10,8 +10,7 @@ public:
             if(s[i]==' '){
                 return count;
             }
-            count++;
-            
+            count++;      
         }
     return count;}
 };
