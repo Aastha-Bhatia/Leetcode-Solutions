@@ -1,0 +1,48 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        int l1=a.length()-1;
+        int l2=b.length()-1;
+        int carry=0;
+        StringBuilder sb=new StringBuilder();
+        while(l1>=0||l2>=0){
+            int x=l1>=0?a.charAt(l1)-'0':0;
+            int y=l2>=0?b.charAt(l2)-'0':0;
+            int sum=x+y+carry;
+            if(sum==0){
+                carry=0;
+                sb.append('0');
+            }
+            else if(sum==1){
+                carry=0;
+                sb.append('1');
+            }
+            else if(sum==2){
+                carry=1;
+                sb.append('0');
+            }
+            else{
+                carry=1;
+                sb.append('1');
+            }
+            l1--;
+            l2--;
+        }
+        if(carry==1){
+            sb.append('1');
+        }
+        return sb.reverse().toString();
+    }
+}
+
+// simple solution 
+// add binary
+// import java.math.BigInteger;
+// class Solution{
+//     public String addBinary(String a,String b) {
+//         BigInteger a1=new BigInteger(a,2);
+//         BigInteger b1=new BigInteger(b,2);
+//         BigInteger c=a1.add(b1);
+//         // System.out.println(c.toString(2));
+//         return c.toString(2);
+//     }
+// }
