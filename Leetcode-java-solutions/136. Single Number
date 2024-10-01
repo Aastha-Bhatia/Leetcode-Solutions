@@ -1,0 +1,30 @@
+// class Solution {
+    // public int singleNumber(int[] nums) {
+        // better approach
+    //     int max=nums[0];
+    //     for(int i=0;i<nums.length;i++){
+    //         max=Math.max(max,nums[i]);
+    //     } 
+    //     int hash[]=new int[max+1];
+    //     for(int i=0;i<nums.length;i++){
+    //         hash[nums[i]]++;
+    //     }
+    //     for(int i=0;i<hash.length;i++){
+    //         if(hash[i]==1){
+    //             return i;
+    //         }
+    //     }
+    // return -1;
+    // }
+// }
+
+//best approach using XOR operator
+class Solution {
+    public int singleNumber(int[] nums) {
+        int XOR=0;
+        for(int i=0;i<nums.length;i++){
+            XOR=XOR^nums[i];
+        }
+    return XOR;
+    }
+}
