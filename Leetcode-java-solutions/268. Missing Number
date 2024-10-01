@@ -1,0 +1,60 @@
+// brute force
+// class Solution {
+//     public int missingNumber(int[] nums) {
+//         for(int i=1;i<=nums.length;i++){
+//             int flag=0;
+//             for(int j=0;j<nums.length;j++){
+//                 if(nums[j]==i){
+//                     flag=1;
+//                     break;
+//                 }
+//             }
+//             if(flag==0){
+//                 return i;
+//             }
+//         }
+//     return -1;}
+// }
+
+// better
+// class Solution {
+//     public int missingNumber(int[] nums) {
+//         int hash[]=new int[nums.length+1];
+//         for(int i=0;i<nums.length;i++){
+//             hash[nums[i]]++;
+//         }
+//         for(int i=1;i<=nums.length;i++){
+//             if(hash[i]==0){
+//                 return i;
+//             }
+//         }
+//         return -1;
+//     }
+// }
+
+// best
+// class Solution {
+//     public int missingNumber(int[] nums) {
+//         int sum=nums.length*(nums.length+1)/2;
+//         int sum2=0;
+//         for(int i=0;i<nums.length;i++){
+//             sum2+=nums[i];
+//         }
+//         return sum-sum2;
+//     }
+// }
+
+// best using XOR
+class Solution {
+    public int missingNumber(int[] nums){
+        int XOR1=0;
+        for(int i=1;i<=nums.length;i++){
+            XOR1=XOR1^i;
+        }
+        int XOR2=0;
+        for(int i=0;i<nums.length;i++){
+            XOR2=XOR2^nums[i];
+        }
+        return XOR1^XOR2;
+    }
+}
