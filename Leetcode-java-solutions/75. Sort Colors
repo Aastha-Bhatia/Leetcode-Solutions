@@ -1,0 +1,27 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        // using dutch flag algo
+        int low=0;
+        int mid=0;
+        int end=nums.length-1;
+        while(mid<=end){
+            if(nums[mid]==0){
+                swap(nums,mid,low);
+                low++;
+                mid++;
+            }
+            else if(nums[mid]==2){
+                swap(nums,mid,end);
+                end--;
+            }
+            else if(nums[mid]==1){
+                mid++;
+            }
+        }
+    }
+    public void swap(int nums[],int i,int j){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+}
