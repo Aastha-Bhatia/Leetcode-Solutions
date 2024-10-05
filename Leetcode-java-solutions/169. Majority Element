@@ -1,0 +1,47 @@
+// // using hashmap
+// class Solution {
+//     public int majorityElement(int[] nums) {
+//         int n=nums.length;
+//         HashMap<Integer,Integer>mpp=new HashMap<>();
+//         for(int i=0;i<n;i++){
+//             // if the number already exists as a key, it returns the current value, otherwise, it returns a 0.
+//             int value=mpp.getOrDefault(nums[i],0);
+//             // then it puts the key and value inside the map.
+//             mpp.put(nums[i],value+1);
+//         }
+//         // now iterating in the map.
+//         for(Map.Entry<Integer,Integer> it:mpp.entrySet()){
+//             if(it.getValue()>n/2){
+//                 return it.getKey();
+//             }
+//         }
+//         return -1;
+//     }
+// }
+
+// using Moose's voting algo
+class Solution {
+    public int majorityElement(int[] nums) {
+        int n=nums.length;
+        int count=0;
+        int element=0;
+        for(int i=0;i<n;i++){
+            if(count==0){
+                count=1;
+                element=nums[i];
+            }
+            else if(element==nums[i])count++;
+            else count--;
+        }
+        // checking it it actually is a majority element
+        int count1=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]==element){
+                count1++;
+            }
+        }
+        if(count1>n/2)return element;
+        return -1;
+    }
+}
+
