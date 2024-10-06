@@ -1,0 +1,42 @@
+// Brute force
+// tc- O(N)+O(N/2)
+// sc- O(N)
+// class Solution {
+//     public int[] rearrangeArray(int[] nums) {
+//         ArrayList<Integer> pos=new ArrayList<>();
+//         ArrayList<Integer> neg=new ArrayList<>();
+//         for(int i=0;i<nums.length;i++){
+//             if(nums[i]>0){
+//                 pos.add(nums[i]);
+//             }
+//             else{
+//                 neg.add(nums[i]);
+//             }
+//         }
+//         for(int i=0;i<nums.length/2;i++){
+//             nums[i*2]=pos.get(i);
+//             nums[i*2+1]=neg.get(i);
+//         }
+//         return nums;
+//     }
+// }
+
+// better
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int arr[]=new int[nums.length];
+        int pos=0;
+        int neg=1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<0){
+                arr[neg]=nums[i];
+                neg+=2;
+            }
+            else{
+                arr[pos]=nums[i];
+                pos+=2;
+            }
+        }
+        return arr;
+    }
+}
