@@ -1,0 +1,38 @@
+class Solution {
+    public int maximumSwap(int num) {
+        ArrayList<Integer> a=new ArrayList<>();
+        int reverse=0;
+        while(num!=0){
+            int last=num%10;
+            a.add(last);
+            num/=10;
+        }
+        Collections.reverse(a);
+        
+        // prefix sum approach
+        int rightmax[]=new int[a.size()];
+        rightmax[a.size()-1]=a.get(a.size()-1);
+        for(int i=a.size()-2;i>=0;i--){
+            rightmax[i]=Math.max(rightmax[i+1],a.get(i));
+        }
+        // we will get our rightmax array
+        for(int i=0;i<a.size();i++){
+            if(a.get(i)<rightmax[i]){
+                // now we have to check the largest digit to swap with
+                for(int j=a.size()-1;j>i;j--){
+                    if(a.get(j)==rightmax[i]){
+                        //swap
+                        Collections.swap(a,i,j);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        StringBuilder sb=new StringBuilder();
+        for(int it:a){
+            sb.append(it);
+        }
+    return Integer.parseInt(sb.toString());
+    }
+}
