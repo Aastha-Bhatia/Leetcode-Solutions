@@ -1,0 +1,82 @@
+class Solution {
+    List<List<String>> ans=new ArrayList<>();
+    public List<List<String>> solveNQueens(int n) {
+        // task 1:- to create a grid
+        // we are given only int n. we will create a grid of size nxn
+        char[][]grid=new char[n][n];
+        for(int i=0;i<grid.length;i++){
+            // there is an inbuilt method Arrays.fill
+            Arrays.fill(grid[i],'.');
+        }
+            solve(grid,0);
+            return ans;
+    }
+    // task 2- make a recursive function
+        // we need to make a recursive function to solve this problem using parameters available to us
+        public void solve(char[][]grid, int row){
+            // base condition
+            if(row==grid.length){
+                // when we reach the end, it means it is a valid array. we need to add the elements to a list.
+                addans(grid);
+                return;
+            }
+            // we are checking for each column if we can place 
+            for(int i=0;i<grid.length;i++){
+                // we are creating a function to check if it is possible to place the queen there, if it is then only we will place it... otherwise not
+                if(ispossible(grid,row,i)){
+                    grid[row][i]='Q';
+                    //move to the next row if possible
+                    solve(grid,row+1);
+                    //most important step- backtracking... 
+                    //after checking for all,we need to backtrack and do arr[row][i] back to '.' and check for the next possible conditon
+                    grid[row][i]='.';
+
+                }
+            }
+        }
+        // we have created a function to add all the elements in array as string to our list.
+        public void addans(char[][]grid){
+            ArrayList<String> ls=new ArrayList<>();
+            for(int i=0;i<grid.length;i++){
+                String temp="";
+                for(int j=0;j<grid.length;j++){
+                    temp+=grid[i][j];
+                }
+                ls.add(temp);
+            }
+            ans.add(ls);
+        }
+        // check if queen placement is possible or not
+        public boolean ispossible(char[][]grid,int row,int col){
+            // checking for upward direction
+            for(int i=row;i>=0;i--){
+                if(grid[i][col]=='Q'){
+                    return false;
+                }
+            }
+            // checking for the left diagonal
+            int x=row;
+            int y=col;
+            // because both are going towards 0.
+            while(x>=0 && y>=0){
+                if(grid[x][y]=='Q'){
+                    return false;
+                }
+                x--;
+                y--;
+            }
+            // checking for right diagonal
+            x=row;
+            y=col;
+            // because row is decreasing and column is icreasing
+            while(x>=0 && y<grid.length){
+                if(grid[x][y]=='Q'){
+                    return false;
+                }
+                x--;
+                y++;
+            }
+            // so we can place Q
+            return true;
+        }
+}
