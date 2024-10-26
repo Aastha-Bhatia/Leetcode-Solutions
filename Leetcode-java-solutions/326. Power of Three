@@ -1,0 +1,32 @@
+// Brute Force approach
+// O(n)
+// class Solution {
+//     public boolean isPowerOfThree(int n) {
+//         int a=0;
+//         for(int i=0;i<=n;i++){
+//             if(Math.pow(3,a)==n){
+//                 return true;
+//             }
+//             a++;
+//         }
+//         return false;
+//     }
+// }
+
+// optimal approach
+class Solution{
+    public boolean isPowerOfThree(int n) {
+        // int maxpowof3=1;
+        // while(maxpowof3<=Integer.MAX_VALUE){
+        //     maxpowof3*=3;
+        // }
+        // System.out.print(maxpowof3);
+        // so we will get ans as:- 1162261467 which is max number of 3^x... so, any number that completely divides this number would be power of 3 perfectly;
+
+        // O(1)
+        if(n>0 && 1162261467%n==0){
+            return true;
+        }
+        return false;
+    }
+}
