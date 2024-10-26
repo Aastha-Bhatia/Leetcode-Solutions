@@ -1,0 +1,16 @@
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        HashMap<Integer,Integer> mpp=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            int count=mpp.getOrDefault(i,0);
+            mpp.put(nums[i],count+1);
+        }
+        List<Integer> list=new ArrayList<>();
+        for(int i=1;i<=nums.length;i++){
+            if(!mpp.containsKey(i)){
+                list.add(i);
+            }
+        }
+        return list;
+    }
+}
