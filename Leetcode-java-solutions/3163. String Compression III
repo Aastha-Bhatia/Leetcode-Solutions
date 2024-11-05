@@ -1,0 +1,16 @@
+class Solution {
+    public String compressedString(String word) {
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<word.length();i++){
+            char current=word.charAt(i);
+            int count=1;
+            for(int j=i+1;j<word.length() && count<9 && word.charAt(j)==current;j++){
+                count++;
+                i++;
+            }  
+                sb.append(count);
+                sb.append(current);
+        }
+        return sb.toString();
+    }
+}
