@@ -1,0 +1,17 @@
+class Solution {
+    public int largestCombination(int[] candidates) {
+        int array[]=new int[32];
+        for(int i=0;i<array.length;i++){
+            for(int element:candidates){
+                if(((element>>i)&1)==1){
+                    array[i]++;
+                }
+            }
+        }
+        int ans=0;
+        for(int element:array){
+            ans=Math.max(ans,element);
+        }
+        return ans;
+    }
+}
