@@ -1,16 +1,25 @@
 class Solution {
     public String triangleType(int[] nums){
-       for(int i=0;i<nums.length-2;i++){
-        if(nums[i]==nums[i+1] && nums[i]==nums[i+2]){
-            return "equilateral";
+        int a=nums[0];
+        int b=nums[1];
+        int c=nums[2];
+        boolean isvalid=false;
+        if(a+b>c && b+c>a && c+a>b){
+            isvalid=true;
+        }   
+        if(isvalid==false){
+            return "none";
+        } 
+        else{
+            if(a==b && a==c){
+                return "equilateral";
+            }
+            else if((a==b && a!=c)||(a==c && a!=b)||(b==c && b!=a)){
+                return "isosceles";
+            }
+            else{
+                return "scalene";
+            }
         }
-        else if((nums[i]==nums[i+1] && nums[i]!=nums[i+1]) || nums[i+1]==nums[i+2] && nums[i+1]!=nums[i]){
-            return "isosceles";
-        }
-        else if(nums[i]!=nums[i+1] && nums[i+1]!=nums[i+2]){
-            return "scalene";
-        }
-       }
-    return "none";
     }
 }
