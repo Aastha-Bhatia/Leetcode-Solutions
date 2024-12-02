@@ -1,4 +1,4 @@
-class Solution {
+class Solution{
     public int isPrefixOfWord(String sentence, String searchWord) {
         //split the sentence
         String arr[]=sentence.split(" ");
