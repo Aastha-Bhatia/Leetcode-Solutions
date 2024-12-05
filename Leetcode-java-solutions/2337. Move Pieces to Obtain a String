@@ -13,6 +13,9 @@ class Solution {
         if(i==start.length() && j==target.length()){
             return true;
         }
+        else if(i==start.length() || j==target.length()){
+            return false;
+        }
         if(start.charAt(i)!=target.charAt(j)){
             return false;
         }
