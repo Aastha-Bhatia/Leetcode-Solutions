@@ -1,0 +1,17 @@
+class Solution {
+    public int[] getFinalState(int[] nums, int k, int multiplier) {
+        int min=0;
+        while(k!=0){
+            min=0;
+            for(int i=0;i<nums.length;i++){
+                if(nums[i]<nums[min]){
+                    min=i;
+                }
+            }
+            // we will get minimum
+            nums[min]=nums[min]*multiplier;
+            k--;
+        }
+        return nums;
+    }
+}
