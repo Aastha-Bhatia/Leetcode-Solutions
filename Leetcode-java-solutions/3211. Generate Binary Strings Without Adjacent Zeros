@@ -1,0 +1,21 @@
+class Solution{
+    public void generatebinarystrings(int n,String str,int lastindex,List<String> a){
+        if(n==0){
+            a.add(str);
+            return;
+        }
+        // kaam
+        if(lastindex==0){
+            generatebinarystrings(n-1,str+"1",1,a);
+        }
+        else{
+            generatebinarystrings(n-1,str+"0",0,a);
+            generatebinarystrings(n-1,str+"1",1,a);
+        }
+    }
+    public List<String> validStrings(int n){
+        List<String> a=new ArrayList<>();
+        generatebinarystrings(n,"",1,a);
+        return a;
+    }
+}
