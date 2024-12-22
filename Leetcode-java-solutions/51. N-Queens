@@ -1,82 +1,61 @@
-class Solution {
-    List<List<String>> ans=new ArrayList<>();
-    public List<List<String>> solveNQueens(int n) {
-        // task 1:- to create a grid
-        // we are given only int n. we will create a grid of size nxn
-        char[][]grid=new char[n][n];
-        for(int i=0;i<grid.length;i++){
-            // there is an inbuilt method Arrays.fill
-            Arrays.fill(grid[i],'.');
+class Solution{
+    public static boolean ifvalid(char board[][], int col, int row){
+        // checking for vertically upwards
+        for(int i=row-1;i>=0;i--){
+            if(board[i][col]=='Q'){
+                return false;
+            }
         }
-            solve(grid,0);
-            return ans;
+        // checking for diagonal left
+        for(int i=row-1, j=col-1; i>=0 && j>=0; i--,j--){
+            if(board[i][j]=='Q'){
+                return false;
+            }
+        }
+        // checking for diagonal right
+        for(int i=row-1, j=col+1; i>=0 && j<board.length;i--,j++){
+            if(board[i][j]=='Q'){
+                return false;
+            }
+        }
+        return true;
     }
-    // task 2- make a recursive function
-        // we need to make a recursive function to solve this problem using parameters available to us
-        public void solve(char[][]grid, int row){
-            // base condition
-            if(row==grid.length){
-                // when we reach the end, it means it is a valid array. we need to add the elements to a list.
-                addans(grid);
-                return;
-            }
-            // we are checking for each column if we can place 
-            for(int i=0;i<grid.length;i++){
-                // we are creating a function to check if it is possible to place the queen there, if it is then only we will place it... otherwise not
-                if(ispossible(grid,row,i)){
-                    grid[row][i]='Q';
-                    //move to the next row if possible
-                    solve(grid,row+1);
-                    //most important step- backtracking... 
-                    //after checking for all,we need to backtrack and do arr[row][i] back to '.' and check for the next possible conditon
-                    grid[row][i]='.';
-
-                }
+    public static void calculatenqueens(char board[][], int row, List<List<String>>a){
+        // base case
+        if(row==board.length){
+            addindexes(board,a);
+            return;
+        }
+        for(int j=0;j<board.length;j++){
+            if(ifvalid(board, j, row)){
+                board[row][j]='Q';
+                calculatenqueens(board, row+1, a);
+                board[row][j]='.';
             }
         }
-        // we have created a function to add all the elements in array as string to our list.
-        public void addans(char[][]grid){
-            ArrayList<String> ls=new ArrayList<>();
-            for(int i=0;i<grid.length;i++){
-                String temp="";
-                for(int j=0;j<grid.length;j++){
-                    temp+=grid[i][j];
-                }
-                ls.add(temp);
+    }
+    public static void addindexes(char board[][], List<List<String>>a){
+        List<String> c=new ArrayList<>();
+        for(int i=0;i<board.length;i++){
+            String aa="";
+            for(int j=0;j<board.length;j++){
+                aa=aa+board[i][j];
             }
-            ans.add(ls);
+            c.add(aa);
         }
-        // check if queen placement is possible or not
-        public boolean ispossible(char[][]grid,int row,int col){
-            // checking for upward direction
-            for(int i=row;i>=0;i--){
-                if(grid[i][col]=='Q'){
-                    return false;
-                }
+        a.add(c);
+    }
+    public List<List<String>> solveNQueens(int n){
+        // making an char array
+        char board[][]=new char[n][n];
+        // initialising the board
+        for(int i=0;i<board.length;i++){
+            for(int j=0;j<board.length;j++){
+                board[i][j]='.';
             }
-            // checking for the left diagonal
-            int x=row;
-            int y=col;
-            // because both are going towards 0.
-            while(x>=0 && y>=0){
-                if(grid[x][y]=='Q'){
-                    return false;
-                }
-                x--;
-                y--;
-            }
-            // checking for right diagonal
-            x=row;
-            y=col;
-            // because row is decreasing and column is icreasing
-            while(x>=0 && y<grid.length){
-                if(grid[x][y]=='Q'){
-                    return false;
-                }
-                x--;
-                y++;
-            }
-            // so we can place Q
-            return true;
         }
+        List<List<String>> a=new ArrayList<>();
+        calculatenqueens(board, 0, a);
+        return a;
+    }
 }
