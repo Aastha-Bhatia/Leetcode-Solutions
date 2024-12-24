@@ -1,0 +1,61 @@
+class Solution{
+    public boolean check(char board[][], int row, int col, int num){
+        // row
+         for(int i=0;i<9;i++){
+            if(board[i][col]-'0'==num){
+                return false;
+            }
+         }
+        //  col
+        for(int j=0;j<9;j++){
+            if(board[row][j]-'0'==num){
+                return false;
+            }
+        }
+        // box
+        int ini=row-row%3;
+        int inj=col-col%3;
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(board[ini+i][inj+j]-'0'==num){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public boolean helper(char[][]board,int row,int col){
+        // helper
+        if(row==9){
+            return true;
+        }
+        if(col==9){
+            return helper(board, row+1,0);
+        }
+        if(board[row][col]!='.'){
+            return helper(board,row,col+1);
+        }
+        for(int num=1;num<=9;num++){
+            if(check(board,row,col,num)){
+                board[row][col]=(char)(num+'0');
+                if(helper(board,row,col+1)){
+                    return true;
+                }
+                board[row][col]='.';
+            }
+        }
+        return false;
+    }
+    public void printboard(char board[][]){
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                System.out.print(board[i][j]+" ");
+            }
+            System.out.println("");
+        }
+    }
+    public void solveSudoku(char[][] board){
+        helper(board,0,0);
+        printboard(board);
+    }
+}
