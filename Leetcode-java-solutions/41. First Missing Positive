@@ -16,6 +16,6 @@ class Solution {
                 return i;
             }
         }
-        return max+1;
+        return max==Integer.MIN_VALUE?1:max+1;
     }
 }
