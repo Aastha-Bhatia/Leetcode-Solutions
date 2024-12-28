@@ -1,0 +1,21 @@
+class Solution {
+    public int firstMissingPositive(int[] nums){
+        HashMap<Integer,Integer>  map=new HashMap<>();
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>0){
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+                if(nums[i]>max){
+                    max=nums[i];
+                }
+            }
+        }
+        //  we will get out max by the end of this loop and also we will have all elements till max in our hashmap
+        for(int i=1;i<=max;i++){
+            if(!map.containsKey(i)){
+                return i;
+            }
+        }
+        return max+1;
+    }
+}
