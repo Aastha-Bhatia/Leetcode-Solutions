@@ -1,0 +1,22 @@
+class Solution{
+    public String reversePrefix(String word, char ch){
+        int index=0;
+        for(int i=0;i<word.length();i++){
+            if(word.charAt(i)==ch){
+                index=i;
+                break;
+            }
+        }
+        String firsthalf=word.substring(0,index+1);
+        String secondhalf=word.substring(index+1);
+        // reverse the first half
+        char arr[] =firsthalf.toCharArray();
+        StringBuilder firsthalff=new StringBuilder();
+        for(int i=arr.length-1;i>=0;i--){
+            firsthalff.append(arr[i]);
+        }
+        // we will get our reversed string
+        String ans=firsthalff.toString()+secondhalf;
+        return ans;
+    }
+}
