@@ -1,0 +1,23 @@
+class Solution{
+    public int maxScore(String s){
+        int n=s.length();
+        int onecount=0;
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)=='1'){
+                onecount++;
+            }
+        }
+        int zerocount=0;
+        int maxscore=0;
+        for(int i=0;i<n-1;i++){
+            if(s.charAt(i)=='1'){
+                onecount--;
+            }
+            else{
+                zerocount++;
+            }
+            maxscore=Math.max(zerocount+onecount,maxscore);
+        }
+        return maxscore;
+    }
+}
