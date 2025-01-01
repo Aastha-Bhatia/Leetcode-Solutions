@@ -1,0 +1,20 @@
+class Solution{
+    public int countWords(String[] words1, String[] words2){
+        HashMap<String, Integer> mpp=new HashMap<>();
+        for(String str:words1){
+            mpp.put(str,mpp.getOrDefault(str,0)+1);
+        }
+        HashMap<String, Integer> mpp2=new HashMap<>();
+        for(String str:words2){
+            mpp2.put(str,mpp2.getOrDefault(str,0)+1);
+        }
+        int count=0;
+        for(Map.Entry<String, Integer> entry:mpp.entrySet()){
+            String word=entry.getKey();
+            if(entry.getValue()==1 && mpp2.getOrDefault(word, 0)==1){
+                count++;
+            }
+        }
+        return count;
+    }
+}
