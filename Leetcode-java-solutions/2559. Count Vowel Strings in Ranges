@@ -1,0 +1,24 @@
+class Solution{
+    public int[] vowelStrings(String[] words, int[][] queries){
+        boolean arr[]=new boolean[words.length];
+        for(int i=0;i<words.length;i++){
+            if((words[i].charAt(0)=='a' || words[i].charAt(0)=='e' || words[i].charAt(0)=='i' || words[i].charAt(0)=='o' || words[i].charAt(0)=='u') && (words[i].charAt(words[i].length()-1)=='a' || words[i].charAt(words[i].length()-1)=='e' || words[i].charAt(words[i].length()-1)=='i' || words[i].charAt(words[i].length()-1)=='o' || words[i].charAt(words[i].length()-1)=='u')){
+                arr[i]=true;
+            }
+        }
+        int array[]=new int[queries.length];
+        // our boolean array will be made based on vowels
+        for(int i=0;i<queries.length;i++){
+            int start=queries[i][0];
+            int end=queries[i][1];
+            int count=0;
+            for(int k=start;k<=end;k++){
+                if(arr[k]==true){
+                    count++;
+                }
+            }
+            array[i]=count;
+        }
+        return array;
+    }
+}
