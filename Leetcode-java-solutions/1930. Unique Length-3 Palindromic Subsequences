@@ -1,0 +1,24 @@
+class Solution{
+    public int countPalindromicSubsequence(String s){
+        Set<String> set=new HashSet<>();
+        for(int i=0;i<s.length();i++){
+            for(int j=i+1;j<s.length();j++){
+                for(int k=j+1;k<s.length();k++){
+                    String ans=""+s.charAt(i)+s.charAt(j)+s.charAt(k);
+                    // checking if palindrome or not
+                    boolean flag=true;
+                    for(int l=0;l<ans.length()/2;l++){
+                        if(ans.charAt(l)!=ans.charAt(ans.length()-l-1)){
+                            flag=false;
+                            break;
+                        }
+                    }
+                    if(flag==true){
+                        set.add(ans);
+                    }
+                }
+            }
+        }
+        return set.size();
+    }
+}
