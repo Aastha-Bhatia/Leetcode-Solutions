@@ -1,15 +1,13 @@
 class Solution{
     public String removeDigit(String number, char digit){
         StringBuilder sb=new StringBuilder();
-        int changed=0;
-        for(int i=0;i<number.length();i++){
-            if(number.charAt(i)==digit && changed==0){
-                changed=1;
-            }
-            else{
-                sb.append(number.charAt(i));
+        boolean changed=false;
+        for(int i=0;i<number.length()-1;i++){
+            if(number.charAt(i)==digit && number.charAt(i+1)>digit){
+                return number.substring(0,i)+number.substring(i+1);
             }
         }
-        return sb.toString();
+        int lastindex=number.lastIndexOf(digit);
+        return number.substring(0,lastindex)+number.substring(lastindex+1);
     }
 }
