@@ -1,15 +1,24 @@
 class Solution{
-    public String shiftingLetters(String s, int[][] shifts){
-        char chars[]=s.toCharArray();
+    public String shiftingLetters(String s, int[][]shifts){
+        int n=s.length();
+        int[] shiftArray=new int[n+1];
         for(int i=0;i<shifts.length;i++){
             int start=shifts[i][0];
             int end=shifts[i][1];
             int direction=shifts[i][2];
-            for(int j=start;j<=end;j++){
-                int shift=(direction==0)?-1:1;
-                chars[j]=(char)((chars[j]-'a'+shift+26)%26+'a');
+            int shiftValue=(direction==1)?1:-1;
+            shiftArray[start]+=shiftValue;
+            if(end+1<n){
+                shiftArray[end+1]-=shiftValue;
             }
         }
-        return new String(chars);
+        int cumulativeShift=0;
+        char[] result=s.toCharArray();
+        for(int k=0;k<n;k++){
+            cumulativeShift+=shiftArray[k];
+            int shift=(cumulativeShift%26+26)%26;
+            result[k]=(char)((result[k]-'a'+shift)%26+'a');
+        }
+        return new String(result);
     }
 }
