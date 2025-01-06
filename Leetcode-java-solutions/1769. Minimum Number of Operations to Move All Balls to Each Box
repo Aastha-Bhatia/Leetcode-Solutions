@@ -1,0 +1,27 @@
+class Solution{
+    public int[] minOperations(String boxes){
+        int prefix[]=new int[boxes.length()];
+        int suffix[]=new int[boxes.length()];
+        int result[]=new int[boxes.length()];
+        int count1=0;
+        prefix[0]=0;
+        for(int i=1;i<boxes.length();i++){
+            if(boxes.charAt(i-1)=='1'){
+                count1++;
+            }
+            prefix[i]=prefix[i-1]+count1;
+        }
+        int countone=0;
+        suffix[suffix.length-1]=0;
+        for(int i=suffix.length-2;i>=0;i--){
+            if(boxes.charAt(i+1)=='1'){
+                countone++;
+            }
+            suffix[i]=suffix[i+1]+countone;
+        }
+        for(int i=0;i<result.length;i++){
+            result[i]=prefix[i]+suffix[i];
+        }
+        return result;
+    }
+}
