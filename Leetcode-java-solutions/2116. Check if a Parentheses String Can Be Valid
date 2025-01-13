@@ -1,0 +1,39 @@
+class Solution{
+    public boolean canBeValid(String s, String locked){
+        int n=s.length();
+        if(n%2!=0){
+            return false;
+        }
+        int balanced=0;
+        for(int i=0;i<n;i++){
+            if(locked.charAt(i)=='0'){
+                balanced++;
+            }
+            else if(s.charAt(i)=='('){
+                balanced++;
+            }
+            else{
+                balanced--;
+            }
+            if(balanced<0){
+                return false;
+            }
+        }
+        balanced=0;
+        for(int i=s.length()-1;i>=0;i--){
+            if(locked.charAt(i)=='0'){
+                balanced++;
+            }
+            else if(s.charAt(i)==')'){
+                balanced++;
+            }
+            else{
+                balanced--;
+            }
+            if(balanced<0){
+                return false;
+            }
+        }   
+        return true;
+    }
+}
