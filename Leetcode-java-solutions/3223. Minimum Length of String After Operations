@@ -1,0 +1,24 @@
+class Solution{
+    public int minimumLength(String s){
+        // counting the frequency of each char
+        int count[]=new int[26];
+        for(int i=0;i<s.length();i++){
+            count[s.charAt(i)-'a']++;
+        }
+        int ans=0;
+        for(int i=0;i<26;i++){
+            if(count[i]==0){
+                continue;
+            }
+            else if(count[i]%2==0){
+                // even frquency
+                ans+=2;
+            }
+            else{
+                // odd 
+                ans+=1;
+            }
+        }
+        return ans;
+    }
+}
