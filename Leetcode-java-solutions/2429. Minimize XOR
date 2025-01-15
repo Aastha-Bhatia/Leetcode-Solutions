@@ -1,0 +1,22 @@
+class Solution{
+    public int minimizeXor(int num1, int num2){
+        int count=Integer.bitCount(num2);
+        int result=0;
+        // from left to right
+        // canceling the set bits from heighest to lowest weight
+        for(int i=31;i>=0 && count>0;i--){
+            if((num1 & (1<<i))!=0){
+                count--;
+                result+=(1<<i);
+            }
+        }
+        // if still count value is left then we will set bits from lowest to heighest, i.e from right to left
+        for(int i=0;i<=31 && count>0;i++){
+            if((num1 & (1<<i))==0){
+                count--;
+                result+=(1<<i);
+            }
+        }
+        return result;
+    }
+}
