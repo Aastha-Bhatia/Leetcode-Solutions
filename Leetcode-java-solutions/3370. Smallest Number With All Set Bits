@@ -1,0 +1,19 @@
+class Solution{
+    public int smallestNumber(int n){
+        int i=n;
+        while(checksetbits(i)!=true){
+                i++;
+            }
+        return i;
+    }
+    public static boolean checksetbits(int i){
+        while(i!=0){
+            int last=i&1;
+            if(last==0){
+                return false;
+            }
+            i=i>>1;
+        }
+        return true;
+    }
+}
