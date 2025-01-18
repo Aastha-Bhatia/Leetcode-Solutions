@@ -1,0 +1,18 @@
+class Solution{
+    public int bitwiseComplement(int n){
+        int ans=0;
+        int power=0;
+        while(n!=0){
+            int last=n&1;
+            if(last==1){
+                ans+=Math.pow(2,power)*0;
+            }
+            else{
+                ans+=Math.pow(2,power)*1;
+            }
+            n=n>>1;
+            power++;
+        }
+        return ans;
+    }
+}
