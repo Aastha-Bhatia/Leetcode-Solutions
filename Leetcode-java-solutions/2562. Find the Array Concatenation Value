@@ -1,0 +1,21 @@
+class Solution{
+    public long findTheArrayConcVal(int[] nums){
+        int start=0;
+        int end=nums.length-1;
+        int sum=0;
+        while(start<end){
+            String temp=Integer.toString(nums[start])+Integer.toString(nums[end]);
+            // now we need to make it a number
+            int number=Integer.parseInt(temp);
+            sum+=number;
+            start++;
+            end--;
+        }
+        // checking if array is odd, adding middle
+        if((nums.length)%2!=0){
+            // middle
+            sum+=nums[start];
+        }
+        return sum;
+    }
+}
