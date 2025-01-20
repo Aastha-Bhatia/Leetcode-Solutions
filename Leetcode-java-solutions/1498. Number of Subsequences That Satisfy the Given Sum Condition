@@ -1,0 +1,30 @@
+class Solution{
+    public int numSubseq(int[] nums, int target){
+        // two pointer as constraint says 10^5 and 2^n or 2^10^5 would exceed. so we need a o(n) sol so two pointer approach is required
+        // in questin it is also mentioned that array is very large and we need to return it in mod
+        // _ means nothing it is just coz it is in the readable format.
+        int mod=1_000_000_000+7;
+        int pow[]=new int[nums.length];
+        pow[0]=1;
+        // we made a power array....
+        for(int i=1;i<nums.length;i++){
+            // what if pow becomes out of our range that is given, 
+            pow[i]=(pow[i-1]*2)%mod;
+        }
+        Arrays.sort(nums);
+        int count=0;
+        int i=0;
+        int j=nums.length-1;
+        while(i<=j){
+            if(nums[i]+nums[j]<=target){
+                // calculate the no. of possible subsequences
+                count=(count+pow[j-i])%mod;
+                i++;
+            }
+            else{
+                j--;
+            }
+        }
+        return count;
+    }
+}
