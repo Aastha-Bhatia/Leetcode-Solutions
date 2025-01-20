@@ -1,0 +1,16 @@
+class Solution{
+    public int countElements(int[] nums){
+        // -71 -71 -71 40 93
+        // 2 7 11 15
+        int count=0;
+        Arrays.sort(nums);
+        int smallest=nums[0];
+        int largest=nums[nums.length-1];
+        for(int i=0;i<nums.length-1;i++){
+            if(nums[i]>smallest && nums[i]<largest){
+                count++;
+            }
+        }
+        return count;
+    }
+}
