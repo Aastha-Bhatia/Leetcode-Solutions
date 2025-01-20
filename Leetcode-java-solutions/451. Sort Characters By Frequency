@@ -1,0 +1,19 @@
+class Solution{
+    public String frequencySort(String s){
+        HashMap<Character, Integer> mpp=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            mpp.put(s.charAt(i), mpp.getOrDefault(s.charAt(i),0)+1);
+        }
+        // now i need to sort the map according to the count values..
+        // sorting map is very difficult, so i am making a list and then sorting the list easily based on inbuilt function
+        List<Map.Entry<Character, Integer>> list=new ArrayList<>(mpp.entrySet());
+        Collections.sort(list,(a,b)->b.getValue()-a.getValue());
+        StringBuilder sb=new StringBuilder();
+        for(Map.Entry<Character, Integer> entry:list){
+            for(int i=0;i<entry.getValue();i++){
+                sb.append(entry.getKey());
+            }
+        }
+        return sb.toString();
+    }
+}
