@@ -1,0 +1,26 @@
+class Solution{
+    public boolean validMountainArray(int[] arr){
+        boolean ismountain=true;
+        if(arr.length<3){
+            return false;
+        }
+        int i=0;
+        // going in the upward direction or the peek
+        while(i<arr.length-1 && arr[i]<arr[i+1]){
+            i++;
+        }
+        // as the peak cannot be 0 or last 
+        if(i==0 || i==arr.length-1){
+            return false;
+        }
+        // going downward direction
+        while(i<arr.length-1 && arr[i]>arr[i+1]){
+            i++;
+        }
+        // when we reach the last, it means it is valid
+        if(i==arr.length-1){
+            return true;
+        }
+        return false;
+    }
+}
