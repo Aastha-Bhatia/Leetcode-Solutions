@@ -1,5 +1,11 @@
 class Solution{
     public boolean isValid(String s){
+        if(s.length()<2){
+            return false;
+        }
+        if(s.charAt(0)==')' || s.charAt(0)=='}' || s.charAt(0)==']'){
+            return false;
+        }
         Stack<Character> stack=new Stack<>();
         for(int i=0;i<s.length();i++){
             if(s.charAt(i)=='('){
@@ -12,6 +18,9 @@ class Solution{
                 stack.push('{');
             }
             else if(s.charAt(i)==')'){
+                if(stack.empty()){
+                    return false;
+                }
                 if(stack.peek()!='('){
                     return false;
                 }
@@ -20,6 +29,9 @@ class Solution{
                 }
             }
             else if(s.charAt(i)==']'){
+                if(stack.empty()){
+                    return false;
+                }
                 if(stack.peek()!='['){
                     return false;
                 }
@@ -28,6 +40,9 @@ class Solution{
                 }
             }
             else if(s.charAt(i)=='}'){
+                if(stack.empty()){
+                    return false;
+                }
                 if(stack.peek()!='{'){
                     return false;
                 }
@@ -36,6 +51,6 @@ class Solution{
                 }
             }   
         }
-        return true;
+        return stack.empty();
     }
 }
