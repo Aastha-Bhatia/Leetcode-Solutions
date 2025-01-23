@@ -1,20 +1,22 @@
 class Solution{
-    public void subsetssubsets(int nums[], List<List<Integer>> a, List<Integer> list, int index){
-        // base case
+    public void findsubsets(int nums[], List<List<Integer>> mainlist, List<Integer> seclist, int index){
         if(index==nums.length){
-            a.add(new ArrayList<>(list));
+            mainlist.add(new ArrayList<>(seclist));
             return;
         }
-        // choice to take from nums
-        list.add(nums[index]);
-        subsetssubsets(nums, a, list, index+1);
-        // choice to not take from nums
-        list.remove(list.size()-1);
-        subsetssubsets(nums, a, list, index+1);
+        // take
+        // add
+        seclist.add(nums[index]);
+        findsubsets(nums, mainlist, seclist, index+1);
+        not take
+        // remove
+        seclist.remove(seclist.size()-1);
+        findsubsets(nums, mainlist, seclist, index+1);
     }
-    public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> a=new ArrayList<>();
-        subsetssubsets(nums, a, new ArrayList<>(), 0);
-        return a;
+    public List<List<Integer>> subsets(int[] nums){
+        List<List<Integer>> mainlist=new ArrayList<>();
+        List<Integer> seclist=new ArrayList<>();
+        findsubsets(nums,mainlist,seclist,0);
+        return mainlist;
     }
 }
