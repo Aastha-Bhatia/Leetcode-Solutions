@@ -1,5 +1,5 @@
-class Solution {
-    public int[] productExceptSelf(int[] nums) {
+class Solution{
+    public int[] productExceptSelf(int[] nums){
         int newarray[]=new int[nums.length];
         int prod=1;
         int zerocount=0;

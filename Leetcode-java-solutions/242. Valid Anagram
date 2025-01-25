@@ -1,5 +1,5 @@
-class Solution {
-    public boolean isAnagram(String s, String t) {
+class Solution{
+    public boolean isAnagram(String s, String t){
         s=s.toLowerCase();
         t=t.toLowerCase();
         char arr1[]=s.toCharArray();
