@@ -1,0 +1,42 @@
+class Solution{
+    public static void merge(int nums[],int start,int mid,int end){
+        List<Integer>list=new ArrayList<>();
+        int p1=start;
+        int p2=mid+1;
+        while(p1<=mid && p2<=end){
+            if(nums[p1]<nums[p2]){
+                list.add(nums[p1]);
+                p1++;
+            }
+            else{
+                list.add(nums[p2]);
+                p2++;
+            }
+        }
+        while(p1<=mid){
+            list.add(nums[p1]);
+            p1++;
+        }
+        while(p2<=end){
+            list.add(nums[p2]);
+            p2++;
+        }
+        // change our original array
+        for(int i=0;i<list.size();i++){
+            nums[start+i]=list.get(i);
+        }
+    }
+    public static void mergesort(int nums[],int start,int end){
+        if(start>=end){
+            return;
+        }
+        int mid=(start+end)/2;
+        mergesort(nums,start,mid);
+        mergesort(nums,mid+1,end);
+        merge(nums,start,mid,end);
+    }
+    public int[] sortArray(int[] nums){
+        mergesort(nums,0,nums.length-1);
+        return nums;
+    }
+}
