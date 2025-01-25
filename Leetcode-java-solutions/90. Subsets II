@@ -1,0 +1,23 @@
+class Solution{
+    public static void findpowerset(Set<List<Integer>>mainlist,ArrayList<Integer>seclist,int nums[],int index){
+        if(index==nums.length){
+            mainlist.add(new ArrayList<>(seclist));
+            return;
+        }
+        // choices
+        // take
+        seclist.add(nums[index]);
+        findpowerset(mainlist, seclist, nums, index+1);
+        // not take
+        seclist.remove(seclist.size()-1);
+        findpowerset(mainlist, seclist, nums, index+1);
+    }
+    public List<List<Integer>> subsetsWithDup(int[] nums){
+        Arrays.sort(nums);
+        Set<List<Integer>> mainlist=new HashSet<>();
+        ArrayList<Integer> seclist=new ArrayList<>();
+        findpowerset(mainlist, seclist, nums, 0);
+        // converting set to arraylist
+        return new ArrayList<>(mainlist);
+    }
+}
