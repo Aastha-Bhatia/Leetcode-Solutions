@@ -1,0 +1,25 @@
+class Solution{
+    public static void findcombination(int candidates[], int target, List<List<Integer>> mainlist, List<Integer> seclist,int sum,int index){
+            if(sum==target){
+                mainlist.add(new ArrayList<>(seclist));
+                return;
+            }
+            if(sum>target || index==candidates.length){
+            return; 
+        }
+        // take
+        seclist.add(candidates[index]);
+        sum+=candidates[index];
+        findcombination(candidates, target, mainlist, seclist,sum,index);
+        // not take
+        seclist.remove(seclist.size()-1);
+        sum-=candidates[index];
+        findcombination(candidates, target, mainlist, seclist,sum,index+1);
+    }
+    public List<List<Integer>> combinationSum(int[] candidates, int target){
+        List<List<Integer>> mainlist=new ArrayList<>();
+        List<Integer> seclist=new ArrayList<>();
+        findcombination(candidates, target, mainlist, seclist,0,0);
+        return mainlist;
+    }
+}
