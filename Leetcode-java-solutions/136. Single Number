@@ -1,5 +1,5 @@
-// class Solution {
-    // public int singleNumber(int[] nums) {
+// class Solution{
+    // public int singleNumber(int[] nums){
         // better approach
     //     int max=nums[0];
     //     for(int i=0;i<nums.length;i++){
@@ -19,8 +19,8 @@
 // }
 
 //best approach using XOR operator
-class Solution {
-    public int singleNumber(int[] nums) {
+class Solution{
+    public int singleNumber(int[] nums){
         int XOR=0;
         for(int i=0;i<nums.length;i++){
             XOR=XOR^nums[i];
