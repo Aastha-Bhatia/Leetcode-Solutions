@@ -1,29 +1,24 @@
 class Solution{
-    public void findpermute(int nums[], List<List<Integer>> a, List<Integer> list){
-        if(nums.length==0){
-            a.add(new ArrayList<>(list));
+    public static void findpermutations(List<List<Integer>>mainlist,List<Integer>seclist,int[]nums,boolean frequency[]){
+        if(seclist.size()==nums.length){
+            mainlist.add(new ArrayList<>(seclist));
             return;
         }
         for(int i=0;i<nums.length;i++){
-            int current=nums[i];
-            int newarray[]=new int[nums.length-1];
-            int index=0;
-            for(int j=0;j<nums.length;j++){
-                if(j!=i){
-                    newarray[index]=nums[j];
-                    index++;
-                }
+            if(!frequency[i]){
+                frequency[i]=true;
+                seclist.add(nums[i]);
+                findpermutations(mainlist,seclist,nums,frequency);
+                seclist.remove(seclist.size()-1);
+                frequency[i]=false;
             }
-            // new array excluding value of current has been created
-            List<Integer> newList=new ArrayList<>(list);
-            newList.add(current);
-            findpermute(newarray, a, newList);
         }
-
     }
     public List<List<Integer>> permute(int[] nums){
-        List<List<Integer>> a=new ArrayList<>();
-        findpermute(nums, a, new ArrayList<>());
-        return a;
+        List<List<Integer>> mainlist=new ArrayList<>();
+        List<Integer> seclist=new ArrayList<>();
+        boolean frequency[]=new boolean[nums.length];
+        findpermutations(mainlist,seclist,nums,frequency);
+        return mainlist;
     }
 }
