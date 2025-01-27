@@ -1,0 +1,32 @@
+class Solution{
+    public boolean checkInclusion(String s1, String s2){
+        if(s1.length()>s2.length()){
+            return false;
+        }
+        // instead of hashmap, i will use frequency array coz it is more space efficient
+        int first[]=new int[26];
+        for(int i=0;i<s1.length();i++){
+            first[s1.charAt(i)-'a']++;
+        }
+        // size of our sliding window would be size of s1....
+        int second[]=new int[26]; 
+        int left=0;
+        int windowsize=s1.length();
+        // sliding window
+        // calculating first sliding window pehle hi
+        for(int i=left;i<windowsize;i++){
+            second[s2.charAt(i)-'a']++;
+        }
+        if(Arrays.equals(first,second)){
+            return true;
+        }
+        for(int i=windowsize;i<s2.length();i++){
+            second[s2.charAt(i)-'a']++;
+            second[s2.charAt(i-windowsize)-'a']--;
+            if(Arrays.equals(first,second)){
+                return true;
+            }
+        }
+        return false;
+    }
+}
