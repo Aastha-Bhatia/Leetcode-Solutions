@@ -2,16 +2,21 @@ class Solution{
     public int[] maxSlidingWindow(int[] nums, int k){
         Deque<Integer> dq=new LinkedList<>();
         int n=nums.length;
+        // the size of array in output will be n-k+1 
         int ans[]=new int[n-k+1];
         int x=0;
         for(int i=0;i<n;i++){
+            // if it is less than range then we removed it 
             if(dq.size()!=0 && dq.peek()<=i-k){
                 dq.poll();
             }
+            // if the current value is greater than any value we remove all those values last
             while(!dq.isEmpty() && nums[i]>=nums[dq.peekLast()]){
                 dq.pollLast();
             }
+            // and added the current in dq
             dq.add(i);
+            //  jab window ke size ke equal ho jaye tb ans mein add kardo
             if(i+1-k>=0){
                 // window mil gayi
                 ans[x]=nums[dq.peek()];
