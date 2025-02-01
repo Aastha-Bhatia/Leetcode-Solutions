@@ -1,0 +1,23 @@
+class Solution{
+    public static boolean sameparity(int i,int j){
+        if(i%2==0 && j%2==0){
+            // both are even
+            return false;
+        }
+        else if(i%2!=0 && j%2!=0){
+            // both are odd
+            return false;
+        }
+        return true;
+    }
+    public boolean isArraySpecial(int[] nums){
+        // if adjacent elements are of same parity- return false
+        // otherwise i will return true
+        for(int i=0;i<nums.length-1;i++){
+            if(!sameparity(nums[i],nums[i+1])){
+                return false;
+            }
+        }
+        return true;
+    }
+}
