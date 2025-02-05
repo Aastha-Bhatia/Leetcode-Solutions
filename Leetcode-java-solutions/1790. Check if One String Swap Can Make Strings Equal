@@ -12,7 +12,7 @@ class Solution{
                 }
             }
         }
-        if(mismatch.size()==2 && s1.charAt(mismatch.get(0))==s2.charAt(mismatch.get(1)) && s1.charAt(mismatch.get(1)) == s2.charAt(mismatch.get(0))){
+        if(mismatch.size()==2 && s1.charAt(mismatch.get(0))==s2.charAt(mismatch.get(1)) && s1.charAt(mismatch.get(1))==s2.charAt(mismatch.get(0))){
             return true;
         }
         return false;
