@@ -15,21 +15,21 @@ class Solution{
             int k=n-1;
             while(j<k){
                     int sum=nums[i]+nums[j]+nums[k];
-            if(sum>0){
-                k--;
-            }
-            else if(sum<0){
-                j++;
-            }
-            else{
-                // if it becomes equal
-                mainlist.add(Arrays.asList(nums[i],nums[j],nums[k]));
-                j++;
-                 // to skip similar j's - similar middle points
-                while(j<k && nums[j]==nums[j-1]){
+                if(sum>0){
+                    k--;
+                }
+                else if(sum<0){
                     j++;
                 }
-            }
+                else{
+                    // if it becomes equal
+                    mainlist.add(Arrays.asList(nums[i],nums[j],nums[k]));
+                    j++;
+                    // to skip similar j's - similar middle points
+                    while(j<k && nums[j]==nums[j-1]){
+                        j++;
+                    }
+                }
             }
             i++;
         }
