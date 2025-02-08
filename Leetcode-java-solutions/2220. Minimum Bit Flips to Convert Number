@@ -1,0 +1,15 @@
+class Solution{
+    public int minBitFlips(int start, int goal){
+        int flip=0;
+        int xor=start^goal;
+        // for different, 1 will come and for same bits 0 will come..
+        while(xor!=0){
+            if((xor&1)==1){
+                // it means they are different so flip
+                flip++;
+            }
+            xor=xor>>1;
+        }
+        return flip;
+    }
+}
