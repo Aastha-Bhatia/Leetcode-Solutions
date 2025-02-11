@@ -1,0 +1,23 @@
+class Solution{
+    public List<List<String>> suggestedProducts(String[] products, String searchWord){
+        int i=0;
+        List<List<String>> mainlist=new ArrayList<>();
+        Arrays.sort(products);
+        while(i<searchWord.length()){
+            List<String> list=new ArrayList<>();
+            String substring=searchWord.substring(0,i+1);
+            for(int j=0;j<products.length;j++){
+                if(products[j].startsWith(substring)){
+                    list.add(products[j]);
+                }
+                // we need to add only 3 products that has prefix...
+                if(list.size()==3){
+                    break;
+                }
+            }
+            mainlist.add(list);
+            i++;
+        }
+        return mainlist;
+    }
+}
