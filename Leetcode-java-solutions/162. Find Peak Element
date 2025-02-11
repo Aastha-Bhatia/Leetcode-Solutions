@@ -1,13 +1,17 @@
-class Solution {
-    public int findPeakElement(int[] nums) {
-        int largest=Integer.MIN_VALUE;
-        int peak=0;
-        for(int i=0;i<nums.length;i++){
-            if(nums[i]>largest){
-                largest=nums[i];
-                peak=i;
+class Solution{
+    public int findPeakElement(int[] nums){
+        // as O(log n) tc is written so we have to write binary search instead of linear..
+        int start=0;
+        int end=nums.length-1;
+        while(start<end){
+            int mid=(start+end)/2;
+            if(nums[mid]>nums[mid+1]){
+                end=mid;
             }
-        }    
-       return peak;
-    }      
+            else{
+                start=mid+1;
+            }
+        }
+        return end;
+    }
 }
