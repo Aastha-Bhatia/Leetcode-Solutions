@@ -1,0 +1,39 @@
+class Solution{
+    public int splitArray(int[] nums, int k){
+        int low=0;
+        int high=0;
+        int ans=-1;
+        for(int x:nums){
+            low=Math.max(x,low);
+            high+=x;
+        }
+        // using binary search..
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(canPaint(nums,mid,k)){
+                ans=mid;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+    // counting the number of painters..
+    public boolean canPaint(int nums[],int time,int k){
+        int count=0;
+        int sum=0;
+        for(int x:nums){
+            sum+=x;
+            if(sum>time){
+                // we need to increase the painter.. and 
+                count++;
+                // sum will be updated with current value...
+                sum=x;
+            }
+        }
+        count++;
+        return count<=k;
+    }
+}
