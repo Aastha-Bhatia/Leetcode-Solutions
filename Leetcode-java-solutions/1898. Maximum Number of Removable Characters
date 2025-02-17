@@ -1,0 +1,43 @@
+class Solution{
+    public boolean stillSub(String s, String p, boolean arr[]){
+        int ind=0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==p.charAt(ind) && !arr[i]){
+                ind++;
+            }
+            //  if it reaches end..
+            if(ind==p.length()){
+                return true;
+            }
+        }
+        return ind==p.length();
+    }
+    public int maximumRemovals(String s, String p, int[] removable){
+        // we cannot remove the characters directly, because we may need them in further steps..
+        int n=s.length();
+        boolean arr[]=new boolean[n];
+        int ans=0;
+        int low=0;
+        int high=removable.length-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            // suppose mid comes 2, we will remove all elements from 0 to 2... 
+            for(int i=0;i<=mid;i++){
+                // marked true..
+                arr[removable[i]]=true;
+            }
+            // if it is still a subsequence, we'll increase our count..
+            if(stillSub(s,p,arr)){
+                ans=mid+1;
+                // we want to check max, so we'll check further..
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+            // after this, again i'll set all array elements to false..
+            Arrays.fill(arr,false);
+        }
+        return ans;
+    }
+}
