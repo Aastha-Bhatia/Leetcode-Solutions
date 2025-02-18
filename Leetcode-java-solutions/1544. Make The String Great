@@ -1,0 +1,21 @@
+class Solution{
+    public String makeGood(String s){
+        Stack<Character> st=new Stack<>();
+        for(int i=s.length()-1;i>=0;i--){
+            char ch=s.charAt(i);
+            // checking if stack is not empty...
+            if(!st.isEmpty() && Math.abs(ch-st.peek())==32){
+                // it means they are same but of different cases... we will remove them
+                st.pop();
+            }
+            else{
+                st.push(ch);
+            }
+        }
+        StringBuilder sb=new StringBuilder();
+        while(!st.isEmpty()){
+            sb.append(st.pop());
+        }
+        return sb.toString();
+    }
+}
