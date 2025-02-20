@@ -1,0 +1,37 @@
+class Solution{
+    public int carFleet(int target, int[] position, int[] speed){
+        int n=position.length;
+        Pair[] arr=new Pair[n];
+        for(int i=0;i<n;i++){
+            arr[i]=new Pair(position[i],speed[i]);
+        }
+        Arrays.sort(arr,(a,b)->{
+            if(a.pos>b.pos){
+                // swap...
+                return 1;
+            }
+            return -1;
+        });
+        Stack<Double> s=new Stack<>();
+        for(int i=n-1;i>=0;i--){
+            Pair pr=arr[i];
+            double time=(double)(target-pr.pos)/pr.speed;
+            if(!s.isEmpty() && time<=s.peek()){
+                // they can create fleet...
+                // we will not push anything in the stack...
+            }
+            else{
+                s.push(time);
+            }
+        }
+        return s.size();
+    }
+}
+class Pair{
+    int pos;
+    int speed;
+    Pair(int p,int s){
+        pos=p;
+        speed=s;
+    }
+}
