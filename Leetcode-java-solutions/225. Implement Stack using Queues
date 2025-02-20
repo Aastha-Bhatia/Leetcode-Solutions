@@ -1,0 +1,41 @@
+class MyStack{
+    private Queue<Integer> q; 
+    private int size;
+    public MyStack(){    
+        q=new LinkedList<>();  
+        size=0;
+    }
+    public void push(int x){
+        // pushing will be same like stack.. but after pushing, we need to reverse it so that when pop is done we get the last element only first.. also the top..
+        q.offer(x);
+        size++;
+        for(int i=0;i<size-1;i++){
+            // we took the first element and pushed it at the end...
+            q.offer(q.peek());
+            // and removed it from the first..
+            q.poll();
+        }
+    }
+    public int pop(){
+        size--;
+        return q.poll();
+    }
+    public int top(){
+        return q.peek();
+    }
+    public boolean empty(){
+        if(q.size()==0){
+            return true;
+        }
+        return false;
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
