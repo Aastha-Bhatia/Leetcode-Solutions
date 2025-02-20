@@ -18,7 +18,7 @@ class Solution{
             double time=(double)(target-pr.pos)/pr.speed;
             if(!s.isEmpty() && time<=s.peek()){
                 // they can create fleet...
-                // we will not push anything in the stack...
+                // we will not push anything in the stack..
             }
             else{
                 s.push(time);
