@@ -1,0 +1,39 @@
+class Solution{
+    public int nextGreaterElement(int n){
+        // converted n to a string and then to a character array, arr...
+        char arr[]=(Integer.toString(n)).toCharArray();
+        StringBuilder ans=new StringBuilder();
+        
+        int i=arr.length-2;
+        // we go back until it is in decreasing order...
+        while(i>=0 && arr[i]>=arr[i+1]){
+            i--;
+        }
+        // if array is in decreasing order, it means we cannot change anything..
+        if(i==-1){
+            return -1;
+        }
+        int k=arr.length-1;
+        while(arr[k]<=arr[i]){
+            k--;
+        }
+        // we get the greater element than i in k...
+        // swapping i and k..
+        char temp=arr[k];
+        arr[k]=arr[i];
+        arr[i]=temp;
+        // appending in ans till i (i.e the number we found that was non decreasing..)...
+        for(int j=0;j<=i;j++){
+            ans.append(arr[j]);
+        }
+        // then from last till i.. (coz we want non decreasing.. we reversed..)
+        for(int j=arr.length-1;j>i;j--){
+            ans.append(arr[j]);
+        }
+        long anss=Long.parseLong(ans.toString());
+        if(anss>Integer.MAX_VALUE){
+            return -1;
+        }
+        return (int)anss;
+    }
+}
