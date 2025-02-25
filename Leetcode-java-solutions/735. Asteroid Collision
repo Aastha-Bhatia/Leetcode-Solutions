@@ -1,0 +1,32 @@
+class Solution{
+    public int[] asteroidCollision(int[] arr){
+        Stack<Integer> st=new Stack<>();
+        for(int i=0;i<arr.length;i++){
+            int current=arr[i];
+            // there can be 2 conditions current is +ve or -ve...
+            // if curr is +ve we will just push it in stack...
+            if(current>0){
+                st.push(current);
+            }
+            // if -ve, there are chances of collision...
+            else{
+                while(!st.isEmpty() && st.peek()>0 && -current>st.peek()){
+                    st.pop();
+                }
+                if(st.isEmpty() || st.peek()<0){
+                    st.push(current);
+                }
+                // if both are equal...
+                if(-current==st.peek()){
+                    st.pop();
+                }
+            }
+        }
+        int arr1[]=new int[st.size()];
+        int i=arr1.length-1;
+        while(!st.isEmpty()){
+            arr1[i--]=st.pop();
+        }
+        return arr1;
+    }
+}
