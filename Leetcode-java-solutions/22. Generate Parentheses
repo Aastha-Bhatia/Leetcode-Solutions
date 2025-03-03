@@ -1,0 +1,21 @@
+class Solution{
+    List<String> ans=new ArrayList<>();
+    public List<String> generateParenthesis(int n){
+        gp(n,"",0,0);
+        return ans;
+    }
+    public void gp(int n,String curr,int o,int c){
+        // base condition...
+        if(o==n && c==n){
+            ans.add(curr);
+            return;
+        }
+        // we have 2 possibilies- adding '(' || ')'
+        if(o<n){
+            gp(n,curr+"(",o+1,c);
+        }
+        if(o>c && c<n){
+            gp(n,curr+")",o,c+1);
+        }
+    }
+}
