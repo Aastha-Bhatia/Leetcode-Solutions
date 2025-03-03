@@ -1,3 +1,4 @@
+// simple solution using loops:-
 class Solution {
     public int myAtoi(String s) {
         s=s.trim();
@@ -24,5 +25,37 @@ class Solution {
             i++;
         }
         return (int)result*sign;
+    }
+}
+
+// using recursion:-
+class Solution{
+    int max=Integer.MAX_VALUE;
+    int min=Integer.MIN_VALUE;
+    public int myAtoi(String s){
+        // removing trailing and leading spaces...
+        s=s.trim();
+        return solve(s,0,0,1);
+    }
+    public int solve(String s,int ind,int res,int sign){
+        // if we reach end...
+        if(ind>=s.length()){
+            return res*sign;
+        }
+        // if sign..
+        char ch=s.charAt(ind);
+        if(ind==0 && (ch=='+'||ch=='-')){
+            return solve(s,ind+1,res,ch=='-'?-1:1);
+        }
+        // invalid..
+        if(!Character.isDigit(ch)){
+            return res*sign;
+        }
+        // if valid...
+        int digit=ch-'0';
+        if((long)res*10+digit>max){
+            return sign==1?max:min;
+        }
+        return solve(s,ind+1,res*10+digit,sign);
     }
 }
