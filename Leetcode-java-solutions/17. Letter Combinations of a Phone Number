@@ -1,0 +1,24 @@
+class Solution{
+    List<String> ans;
+    public List<String> letterCombinations(String digits){
+        ans=new ArrayList<>();
+        String[] arr={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        if(digits.length()==0){
+            return ans;
+        }
+        solve(arr,digits,"",0);
+        return ans;
+    }
+    public void solve(String arr[],String digits,String curr,int ind){
+        if(ind>=digits.length()){
+            ans.add(curr);
+            return;
+        }
+        int digit=digits.charAt(ind)-'0';
+        String str=arr[digit];
+        for(int i=0;i<str.length();i++){
+            char ch=str.charAt(i);
+            solve(arr,digits,curr+ch,ind+1);
+        }
+    }
+}
