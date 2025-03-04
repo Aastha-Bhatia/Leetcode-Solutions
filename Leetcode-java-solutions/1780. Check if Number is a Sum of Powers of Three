@@ -1,0 +1,9 @@
+class Solution{
+    public boolean checkPowersOfThree(int n){
+        // converted the given number to base 3...
+        // base3 will have only 0's 1's and 2's..
+        // if it has 0 or 1, it can be a power, it it has 2, it cannot be...
+        String base3=Integer.toString(n,3);
+        return !base3.contains("2");
+    }
+}
