@@ -1,24 +1,24 @@
 class Solution{
-    public static void findpermutations(List<List<Integer>>mainlist,List<Integer>seclist,int[]nums,boolean frequency[]){
-        if(seclist.size()==nums.length){
-            mainlist.add(new ArrayList<>(seclist));
+    List<List<Integer>> ans;
+    public List<List<Integer>> permute(int[] nums){
+        ans=new ArrayList<>();
+        solve(nums,new Stack<>(),new boolean[nums.length]);
+        return ans;
+    }
+    public void solve(int nums[],Stack<Integer>st,boolean vis[]){
+        if(st.size()==nums.length){
+            ans.add(new ArrayList<>(st));
             return;
         }
         for(int i=0;i<nums.length;i++){
-            if(!frequency[i]){
-                frequency[i]=true;
-                seclist.add(nums[i]);
-                findpermutations(mainlist,seclist,nums,frequency);
-                seclist.remove(seclist.size()-1);
-                frequency[i]=false;
+            if(!vis[i]){
+                st.push(nums[i]);
+                vis[i]=true;
+                solve(nums,st,vis);
+                // backtrack...
+                st.pop();
+                vis[i]=false;
             }
         }
-    }
-    public List<List<Integer>> permute(int[] nums){
-        List<List<Integer>> mainlist=new ArrayList<>();
-        List<Integer> seclist=new ArrayList<>();
-        boolean frequency[]=new boolean[nums.length];
-        findpermutations(mainlist,seclist,nums,frequency);
-        return mainlist;
     }
 }
