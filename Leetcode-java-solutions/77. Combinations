@@ -1,0 +1,21 @@
+class Solution{
+    List<List<Integer>> ans;
+    public List<List<Integer>> combine(int n,int k){
+        ans=new ArrayList<>();
+        solve(n,k,new Stack<>(),1);
+        return ans;
+    }
+    public void solve(int n,int k,Stack<Integer>s,int curr){
+        // base condition...
+        if(s.size()==k){
+            ans.add(new ArrayList<>(s));
+            return;
+        }
+        for(int i=curr;i<=n;i++){
+            s.push(i);
+            solve(n,k,s,i+1);
+            // backtracking...
+            s.pop();
+        }
+    }
+}
