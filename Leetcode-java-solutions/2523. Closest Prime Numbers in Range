@@ -1,0 +1,43 @@
+class Solution{
+    public int[] closestPrimes(int left, int right){
+        List<Integer> list=new ArrayList<>();
+        int index=0;
+        for(int i=left;i<=right;i++){
+            if(i==1){
+                // 1 is composite...
+                continue;
+            }
+            // checking first prime...
+            boolean isprime=true;
+            for(int j=2;j*j<=i;j++){
+                if(i%j==0){
+                    // not prime...
+                    isprime=false;
+                    break;
+                }
+            }
+            if(isprime){
+                list.add(i);
+            }
+        }
+        // traversing in list and finding with min diff.. if list is empty, returning -1..
+        int arr[]={-1,-1};
+        if(list.isEmpty() || list.size()==1){
+            return arr;
+        }
+        else{
+            int first=0;
+            int second=0;
+            int diff=Integer.MAX_VALUE;
+            // fining the ones. with less diff.
+            for(int i=0;i<list.size()-1;i++){
+                if(list.get(i+1)-list.get(i)<diff){
+                    first=list.get(i);
+                    second=list.get(i+1);
+                    diff=second-first;
+                }
+            }
+            return new int[]{first,second};
+        }
+    }
+}
