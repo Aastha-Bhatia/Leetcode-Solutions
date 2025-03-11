@@ -1,0 +1,85 @@
+class Solution{
+    public int countValidWords(String sentence){
+        String arr[]=sentence.split(" ");
+        int count=0;
+        // checking digit...
+        for(int k=0;k<arr.length;k++){
+            String s=arr[k];
+            int flag=0;
+            for(int i=0;i<s.length();i++){
+                if(Character.isDigit(s.charAt(i))){
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag==1){
+                continue;
+            }
+            // lowercase...
+            if(!s.equals(s.toLowerCase())){
+                continue;
+            }
+            // finding atmost 1 punctuation, 1 hypen 
+            HashMap<Character,Integer> map=new HashMap<>();
+            for(int i=0;i<s.length();i++){
+                map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+            }
+            // Checking hypen count
+            int hyp=0;
+            if(map.containsKey('-')){
+                hyp=map.get('-');
+                }
+            if(hyp>1){
+                continue;
+            }
+            // Checking punctuation count
+            int punch=0;
+            if(map.containsKey('!')){
+                punch+=map.get('!');
+            }
+            if(map.containsKey('.')){
+                punch+=map.get('.');
+            }
+            if(map.containsKey(',')){
+                punch+=map.get(',');
+            }
+            if(punch>1){
+                continue;
+            }
+            // Checking before and after of hypen are LowerCase letter
+            if(map.containsKey('-')){
+                if(s.startsWith("-") || s.endsWith("-")){
+                    continue;
+                }
+                int pos=s.indexOf("-");
+                char before=s.charAt(pos-1);
+                char after=s.charAt(pos+1);
+                if(!Character.isLowerCase(before)||!Character.isLowerCase(after)){
+                    continue;
+                }
+            }
+            // Checking punctuation is present atlast
+            if(map.containsKey('!')){
+                if(!s.endsWith("!")){  
+                    continue;
+                }
+            }
+            if(map.containsKey('.')){
+                if(!s.endsWith(".")){
+                    continue;
+                }
+            }
+            if(map.containsKey(',')){
+                if(!s.endsWith(",")){
+                    continue;
+                }
+            }
+            // Checking if a token is space
+            if(map.size()==0){
+                continue;
+            }
+            count++;
+        }
+        return count;
+    }
+}
