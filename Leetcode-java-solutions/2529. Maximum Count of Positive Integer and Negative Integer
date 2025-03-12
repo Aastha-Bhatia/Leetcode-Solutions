@@ -1,0 +1,37 @@
+class Solution{
+    public int maximumCount(int[] nums){
+        // array is sorted, we will use binary search...
+        int low=0;
+        int high=nums.length-1;
+        // -ve is at left, positive is at right...
+        // if we find 1st positive integer.. left will be all -ve, right will be all +ve..
+        while(low<=high){
+            int mid=(low+high)/2;
+            // negative..
+            if(nums[mid]<0){
+                low=mid+1;
+            }
+            // positive..
+            else{
+                high=mid-1;
+            }
+        }
+        // total no. of -ve integers=low
+        int neg=low;
+
+        // finding +ve numbers including 0's..
+        low=0;
+        high=nums.length-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(nums[mid]<=0){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        int pos=nums.length-low;
+        return Math.max(neg,pos);
+    }
+}
