@@ -1,0 +1,40 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode{
+ *     int val;
+ *     ListNode next;
+ *     ListNode(){}
+ *     ListNode(int val){this.val=val;}
+ *     ListNode(int val,ListNode next){this.val=val;this.next=next;}
+ * }
+ */
+class Solution{
+    public ListNode removeNodes(ListNode head){
+        if(head==null){
+            return null;
+        }
+        // creating a list and putting everything in it..
+        List<Integer> list=new ArrayList<>();
+        ListNode temp=head;
+        while(temp!=null){
+            list.add(temp.val);
+            temp=temp.next;
+        }
+        int max=0;
+        for(int i=list.size()-2;i>=0;i--){
+            max=Integer.max(max,list.get(i+1));
+            if(list.get(i)<max){
+                list.remove(i);
+            }
+        }
+        // left with only required elements in list..
+        // putting back to ll..
+        ListNode headd=new ListNode(list.get(0));
+        ListNode tempp=headd;
+        for(int i=1;i<list.size();i++){
+            tempp.next=new ListNode(list.get(i));
+            tempp=tempp.next;
+        }
+        return headd;
+    }
+}
