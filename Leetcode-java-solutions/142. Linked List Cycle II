@@ -7,19 +7,29 @@
  *         next = null;
  *     }
  * }*/
+ // without using extra space...
 public class Solution{
     public ListNode detectCycle(ListNode head){
-        HashMap<ListNode,Boolean> mpp=new HashMap<>();
-        ListNode temp=head;
-        while(temp!=null){
-            if(mpp.containsKey(temp)){
-                return temp;
-            }
-            else{
-                mpp.put(temp,true);
-                temp=temp.next;
+        ListNode slow=head;
+        ListNode fast=head;
+        boolean cycle=false;
+        while(slow!=null && fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            // cycle exists..
+            if(slow==fast){
+                cycle=true;
+                break;
             }
         }
-        return null;
+        if(!cycle){
+            return null;
+        }
+        // but if cycle exists...
+        while(head!=slow){
+            slow=slow.next;
+            head=head.next;
+        }
+        return head;
     }
 }
