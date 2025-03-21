@@ -1,0 +1,6 @@
+class Solution{
+    public boolean canWinNim(int n){
+        // if the number is multiple of 4, we cannot win. but if it is not, we can.
+        return n%4!=0;
+    }
+}
