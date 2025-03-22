@@ -1,0 +1,38 @@
+class Solution{
+    public static void findsubsets(int nums[],int index,ArrayList<ArrayList<Integer>> mainlist,ArrayList<Integer> seclist){
+        if(index==nums.length){
+            // we reached till end...
+            mainlist.add(new ArrayList<>(seclist));
+            return;
+        }
+        // take
+        seclist.add(nums[index]);
+        findsubsets(nums,index+1,mainlist,seclist);
+        // before not take, we remove...
+        seclist.remove(seclist.size()-1);
+        // not take
+        findsubsets(nums,index+1,mainlist,seclist);
+    }
+    public static int calculatexor(ArrayList<ArrayList<Integer>> mainlist){
+        int totalans=0;
+        for(ArrayList<Integer> list:mainlist){
+            int xor=0;
+            for(int i=0;i<list.size();i++){
+                xor=xor^list.get(i);
+            }
+            totalans+=xor;
+        }
+        return totalans;
+    }
+    public int subsetXORSum(int[] nums){
+        // first step- calculating all the subsets...
+        ArrayList<ArrayList<Integer>> mainlist=new ArrayList<>();
+        ArrayList<Integer> seclist=new ArrayList<>();
+        findsubsets(nums,0,mainlist,seclist);
+        // we have each subset in our mainlist now...
+        // System.out.println(mainlist);
+        // now 2ns step will be traversing in mainlist and calculating each xor...
+        int ans=calculatexor(mainlist);
+        return ans;
+    }
+}
