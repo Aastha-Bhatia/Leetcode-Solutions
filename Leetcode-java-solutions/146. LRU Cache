@@ -1,0 +1,85 @@
+class Node{
+    int key;
+    int val;
+    Node next;
+    Node prev;
+    Node(int key,int val){
+        this.key=key;
+        this.val=val;
+    }
+}
+class LRUCache{
+    Node head;
+    Node tail;
+    Map<Integer,Node>map=new HashMap<>();
+    int cap;
+    public LRUCache(int capacity){
+        head=new Node(-1,-1);
+        tail=new Node(-1,-1);
+        head.next=tail;
+        tail.prev=head;
+        cap=capacity;
+    }
+    // these fn were not given, they are added..
+    // to delete node..
+    public void deletenode(Node node){
+        Node pre=node.prev;
+        Node after=node.next;
+        pre.next=after;
+        after.prev=pre;
+    }
+    // placing it after head..
+    public void addafterhead(Node node){
+        Node after=head.next;
+        head.next=node;
+        node.next=after;
+        after.prev=node;
+        node.prev=head;
+    }
+    public int get(int key){
+        if(map.containsKey(key)){
+            Node node=map.get(key);
+            // it has become recently used node..
+            deletenode(node);
+            addafterhead(node);
+            return node.val;
+        }
+        else{
+            return -1;
+        }
+    }
+    public void put(int key, int value){
+        // checking if it already exists..
+        if(map.containsKey(key)){
+            Node node=map.get(key);
+            // updating the value..
+            node.val=value;
+            // it has become recently used node..
+            deletenode(node);
+            addafterhead(node);
+        }
+        else{
+            // 2 cases:- if it is within capacity, if it is not (we will delete the least recently used and put..)
+            Node node=new Node(key,value);
+            if(map.size()>=cap){
+                // deleting least recently used cache..
+                Node lru=tail.prev;
+                map.remove(lru.key);
+                deletenode(lru);
+                map.put(key,node);
+                addafterhead(node);
+            }
+            else{
+                // we will directly put..
+                map.put(key,node);
+                addafterhead(node);
+            }
+        }
+    }
+}
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj=new LRUCache(capacity);
+ * int param_1=obj.get(key);
+ * obj.put(key,value);
+ */
