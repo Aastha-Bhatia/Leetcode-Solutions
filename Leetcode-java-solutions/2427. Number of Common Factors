@@ -1,0 +1,13 @@
+class Solution{
+    public int commonFactors(int a, int b){
+        int less=Math.min(a,b);
+        int more=Math.max(a,b);
+        int count=0;
+        for(int i=1;i<=less;i++){
+            if(more%i==0 && less%i==0){
+                count++;
+            }
+        }
+        return count;
+    }
+}
