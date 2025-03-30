@@ -1,0 +1,17 @@
+class Solution{
+    public int alternateDigitSum(int n){
+        // left to right..
+        String num=Integer.toString(n);
+        int sum=0;
+        for(int i=0;i<num.length();i++){
+            int digit=num.charAt(i)-'0';
+            if(i%2==0){
+                sum+=digit;
+            } 
+            else{
+                sum-=digit;
+            }
+        }
+        return sum;
+    }
+}
