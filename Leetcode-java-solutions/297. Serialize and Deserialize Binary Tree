@@ -1,0 +1,93 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode{
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x){val=x;}
+ * }
+ */
+public class Codec{
+    public String serialize(TreeNode root){
+        if(root==null){
+            return "";
+        }
+        String left=serialize(root.left);
+        String right=serialize(root.right);
+        return root.val+"("+left+")"+"("+right+")";
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        return solve(data,0,data.length()-1);
+    }
+    public TreeNode solve(String str,int start,int end){
+        // base case...
+        // if at anytime, start passes end, it means we have traversed int the whole string...
+        if(start>end){
+            return null;
+        }
+        // we know first values till we encounter bracket will be root node value only and then after it left or right, if exists...
+        String num="";
+        // if it is digit, we will keep adding it in num string..
+        while(start<=end && Character.isDigit(str.charAt(start))|| str.charAt(start)=='-'){
+            num+=str.charAt(start++);
+        }
+        // now we will create root node of this num...
+        TreeNode root=new TreeNode(Integer.parseInt(num));
+        /* 3 thigs will happen for sure:- root.left ke liye call hoga next string ke liye. right ke liye, fir end mein return kr denge root...
+        root.left
+        root.right
+        return root
+        */
+        int ind=-1;
+        if(start<end && str.charAt(start)=='('){
+            ind=findindex(str,start,end);
+        }
+        if(ind!=-1){
+            root.left=solve(str,start+1,ind-1);
+            if(ind+1<=end && str.charAt(ind+1)=='('){
+                root.right=solve(str,ind+2,end-1);
+            }
+        }
+        return root;
+    }
+    // my approach- without using stack or any other extra space.. just by traversing...
+    public int findindex(String str,int start,int end){
+        int count=0;
+        for(int i=start;i<=end;i++){
+            char ch=str.charAt(i);
+            if(ch=='('){
+                count++;
+            }
+            else if(ch==')'){
+                count--;
+            }
+            if(count==0){
+                return i;
+            }
+        }
+        return -1;
+        // sir's approach- stack...
+        // Stack<Character> st=new Stack<>();
+        // for(int i=start;i<=end;i++){
+        //     char ch=str.charAt(i);
+        //     if(ch=='('){
+        //         st.push(ch);
+        //     }
+        //     else if(!st.isEmpty() && ch==')' && st.peek()=='('){
+        //         st.pop();
+        //         // when stack becomes empty, it means we found the index..
+        //         if(st.isEmpty()){
+        //         return i;
+        //         }
+        //     }
+        // }
+        // return -1;
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser=new Codec();
+// Codec deser=new Codec();
+// TreeNode ans=deser.deserialize(ser.serialize(root));
