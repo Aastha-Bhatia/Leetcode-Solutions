@@ -1,0 +1,61 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode{
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(){}
+ *     TreeNode(int val){this.val=val;}
+ *     TreeNode(int val,TreeNode left,TreeNode right){
+ *         this.val=val;
+ *         this.left=left;
+ *         this.right=right;
+ *     }
+ * }
+ */
+class Solution{
+    public TreeNode deleteNode(TreeNode root,int key){
+        // base case..
+        if(root==null){
+            return null;
+        }
+        // first step will be searching the node..
+        if(root.val>key){
+            root.left=deleteNode(root.left,key);
+        }
+        else if(root.val<key){
+            root.right=deleteNode(root.right,key);
+        }
+        // we found the root value equal to key..
+        else{
+            // now we need to delete it...
+            // we have 3 cases:-
+            // 1. it is leaf node..
+            // 2. single side is null..
+            // 3. both sides are not null..
+            if(root.left==null){
+                return root.right;
+            }
+            if(root.right==null){
+                return root.left;
+            }
+            // if both are not null...
+            // we will find in order successor..
+            // right node ka left most node...
+            int is=find(root.right);
+            root.val=is;
+            root.right=deleteNode(root.right,is);
+        }
+        return root;
+    }
+    // fn to find inorder successor..
+    public int find(TreeNode root){
+        int is=root.val;
+        // it will continuously move to the left side and find the leftmost value of right side...
+        while(root!=null){
+            is=root.val;
+            root=root.left;
+        }
+        return is;
+    }
+}
