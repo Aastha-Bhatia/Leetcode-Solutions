@@ -1,0 +1,18 @@
+class Solution{
+    public int passThePillow(int n, int time){
+        // total no. of rounds...
+        int rounds=time/(n-1);
+        int ans=0;
+        // no. of hops remaining
+        int remaining=time%(n-1);
+        // if rounds are even, it will start from left only in +ve direction and add...
+        if(rounds%2==0){
+            ans=1+remaining;
+        }
+        // if rounds are odd, it will start backwards from end in -ve direction...
+        else{
+            ans=n-remaining;
+        }
+        return ans;
+    }
+}
