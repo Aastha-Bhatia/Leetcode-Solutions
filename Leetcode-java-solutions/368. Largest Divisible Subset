@@ -1,0 +1,48 @@
+//gives TLE- I WILL OPTIMISE LATER.. BUT IS CORRECT APPROACH... PUSHING FOR NOW.. 
+class Solution{
+    public static void calculatesubsets(int nums[],List<List<Integer>>mainlist,List<Integer>seclist,int index,int n){
+        // base case..
+        if(index==n){
+            mainlist.add(new ArrayList<>(seclist));
+            return;
+        }
+        // take
+        seclist.add(nums[index]);
+        calculatesubsets(nums,mainlist,seclist,index+1,n);
+        // not take
+        seclist.remove(seclist.size()-1);
+        calculatesubsets(nums,mainlist,seclist,index+1,n);
+    }
+    public List<Integer> largestDivisibleSubset(int[] nums){
+        // first step:- calculate all the subsets..
+        List<List<Integer>> mainlist=new ArrayList<>();
+        List<Integer> seclist=new ArrayList<>();
+        calculatesubsets(nums,mainlist,seclist,0,nums.length);
+        // we have all our subsets in mainlist..
+        // second step:-
+        List<Integer>best=new ArrayList<>();
+        for(List<Integer> a:mainlist){
+            if(a.size()<=best.size()){
+                continue;
+            }
+            boolean isvalid=true;
+            for(int i=0;i<a.size();i++){
+                for(int j=i+1;j<a.size();j++){
+                    int b=a.get(i);
+                    int c=a.get(j);
+                    if(!(b%c==0||c%b==0)){
+                        isvalid=false;
+                        break;
+                    }
+                    if(!isvalid){
+                        break;
+                    }
+                }
+            }
+            if(isvalid){
+                best=new ArrayList<>(a);
+            }
+        }
+        return best;
+    }
+}
