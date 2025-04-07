@@ -1,0 +1,57 @@
+class Solution{
+    public static void calculatesubsets(int nums[],List<List<Integer>>mainlist,List<Integer>seclist,int index,int n){
+        // base case..
+        if(index==n){
+            mainlist.add(new ArrayList<>(seclist));
+            return;
+        }
+        // take
+        seclist.add(nums[index]);
+        calculatesubsets(nums,mainlist,seclist,index+1,n);
+        // not take
+        seclist.remove(seclist.size()-1);
+        calculatesubsets(nums,mainlist,seclist,index+1,n);
+    }
+    public boolean canPartition(int[] nums){
+        int totalsum=0;
+        for(int num:nums){
+            totalsum+=num;
+        }
+        // if total sum is odd, it cannot be divided to 2 equal parts..
+        if(totalsum%2!=0){
+            return false;
+        }
+        int target=totalsum/2;
+        // first step:- calculate all the subsets..
+        List<List<Integer>> mainlist=new ArrayList<>();
+        List<Integer> seclist=new ArrayList<>();
+        calculatesubsets(nums,mainlist,seclist,0,nums.length);
+        // we have all our subsets in mainlist..
+        // second step:- going to each subset and calculating if sum==target... if yes, making a new list excluding the subsets and checking the sum, if both are equal to target, returning true;
+        for(List<Integer> a:mainlist){
+            int sum=0;
+            for(int i=0;i<a.size();i++){
+                sum+=a.get(i);
+            }
+            // if we found a subset sum equal to target...
+            if(sum==target){
+                // created a new arraylist of nums array..
+                List<Integer> remaining=new ArrayList<>();
+                for(int num:nums){
+                    remaining.add(num); 
+                }
+                // removed all subsets.. 
+                remaining.removeAll(a);
+                // then calculated sum for rest..
+                int remainingsum=0;
+                for(int num:remaining){
+                    remainingsum+=num;
+                }
+                if(remainingsum==target){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
