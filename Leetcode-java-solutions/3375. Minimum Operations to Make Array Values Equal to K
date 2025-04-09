@@ -1,0 +1,18 @@
+class Solution{
+    // the problem statement is very confusing.. we have to calculate no. of distinct values in nums greater than k 
+    // 3 approaches- store in set.. and then size.. , make a list or something and check contains and count.. , making a list sorting it and then counting distinct 
+    public int minOperations(int[] nums,int k){
+        int count=0;
+        List<Integer> list=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>k && !list.contains(nums[i])){
+                list.add(nums[i]);
+                count++;
+            }
+            else{
+                list.add(nums[i]);
+            }
+        }
+        return count==0?-1:count;
+    }
+}
