@@ -1,0 +1,16 @@
+class Solution{
+    public int maximumProduct(int[] nums){
+        // brute force- loop nested - o(n^3);
+        // sort array.. last 3 prod..
+        Arrays.sort(nums);
+        boolean allnegative=true;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>0){
+                allnegative=false;
+                break;
+            }
+        }
+        edge case- first 2 negative multiply and last multiply is greater...
+        return Math.max((nums[nums.length-1]*nums[nums.length-2]*nums[nums.length-3]),(nums[0]*nums[1]*nums[nums.length-1]));
+    }
+}
