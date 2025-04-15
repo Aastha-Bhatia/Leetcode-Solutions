@@ -1,0 +1,33 @@
+class Solution{
+    public boolean isNStraightHand(int[] hand,int groupSize){
+        // if array size is not a multiple of group size, it will be invalid only,,
+        int n=hand.length;
+        if(n%groupSize!=0){
+            return false;
+        }
+        // storing all numbers in a map...
+        // tree map instead of map. coz we need smallest element for each...
+        TreeMap<Integer,Integer>mpp=new TreeMap<>();
+        for(int x:hand){
+            mpp.put(x,mpp.getOrDefault(x,0)+1);
+        }
+        // creating groups..
+        while(mpp.size()!=0){
+            // accessing smallest value of treemap..
+            int min=mpp.firstKey();
+            for(int i=0;i<groupSize;i++){
+                if(!mpp.containsKey(min+i)){
+                    return false;
+                }
+                else{
+                    mpp.put(min+i,mpp.get(min+i)-1);
+                    // if count becomes 0
+                    if(mpp.get(min+i)==0){
+                        mpp.remove(min+i);
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
