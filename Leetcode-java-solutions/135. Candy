@@ -1,0 +1,27 @@
+// learnt something really nice today, could'nt think of this myself... but will remember it always..
+class Solution{
+    public int candy(int[] ratings){
+        int arr[]=new int[ratings.length];
+        // checking from left..
+        // filling each child with 1 candies atleast..
+        Arrays.fill(arr,1);
+        // left to right..
+        for(int i=1;i<ratings.length;i++){
+            if(ratings[i]>ratings[i-1]){
+                arr[i]=Math.max(arr[i],arr[i-1]+1);
+            }
+        }
+        // right to left..
+        for(int i=ratings.length-2;i>=0;i--){
+            if(ratings[i]>ratings[i+1]){
+                arr[i]=Math.max(arr[i],arr[i+1]+1);
+            }
+        }
+        // sum
+        int sum=0;
+        for(int i=0;i<arr.length;i++){
+            sum+=arr[i];
+        }
+        return sum;
+    }
+}
