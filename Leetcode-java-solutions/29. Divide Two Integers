@@ -1,0 +1,29 @@
+class Solution{
+    public int divide(int dividend,int divisor){
+        if(dividend==Integer.MIN_VALUE && divisor==-1){
+            return Integer.MAX_VALUE;
+        }
+        if(dividend==divisor){
+            return 1;
+        }
+        boolean sign=true;
+        if(dividend>=0 && divisor<0){
+            sign=false;
+        }
+        else if(dividend<0 && divisor>=0){
+            sign=false;
+        }
+        long n=Math.abs((long)divisor);
+        long d=Math.abs((long)dividend);
+        int ans=0;
+        while(d>=n){
+            int count=0;
+            while(d>=(n*Math.pow(2,count+1))){
+                count++;
+            }
+            ans+=(int)Math.pow(2,count);
+            d=d-n*(int)Math.pow(2,count);
+        }
+        return sign?ans:-1*ans;
+    }
+}
