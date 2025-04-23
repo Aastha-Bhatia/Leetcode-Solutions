@@ -1,0 +1,25 @@
+class Solution{
+    public int[] countBits(int n){
+        int arr[]=new int[n+1];
+        for(int i=0;i<=n;i++){
+            arr[i]=rec(i);
+        }
+        return arr;
+    }
+    public static int rec(int no){
+        if(no==0){
+            return 0;
+        }
+        if(no==1){
+            return 1;
+        }
+        // no is even:-
+        if(no%2==0){
+            return rec(no/2);
+        }
+        // no is odd:-
+        else{
+            return 1+rec(no/2);
+        }
+    }
+}
