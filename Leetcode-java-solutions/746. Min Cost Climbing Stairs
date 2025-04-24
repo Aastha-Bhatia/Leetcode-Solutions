@@ -1,0 +1,22 @@
+class Solution{
+    int dp[];
+    public int minCostClimbingStairs(int[] cost){
+        dp=new int[cost.length];
+        Arrays.fill(dp,-1);
+        return Math.min(solve(cost,0),solve(cost,1));
+    }
+    public int solve(int cost[],int ind){
+        // base case
+        if(ind>=cost.length){
+            return 0;
+        }
+        // to avoid unnecessary recursive calls:-
+        if(dp[ind]!=-1){
+            return dp[ind];
+        }
+        // we have 2 possibilities:-
+        int op1=solve(cost,ind+1);
+        int op2=solve(cost,ind+2);
+        return dp[ind]=cost[ind]+Math.min(op1,op2);
+    }
+}
