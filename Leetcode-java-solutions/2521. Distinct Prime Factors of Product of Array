@@ -1,0 +1,33 @@
+class Solution{
+    public boolean checkprime(int no){
+        if(no<2){
+            return false;
+        }
+        for(int i=2;i<Math.sqrt(no);i++){
+            if(no%i==0){
+                return false;
+            }
+        }
+        return true;
+    }
+    public int distinctPrimeFactors(int[] nums){
+        Set<Integer> primes=new HashSet<>();
+        for(int num:nums){
+            int n=num;
+            for(int i=2;i<=Math.sqrt(n);i++){
+                if(n%i==0){
+                    if(checkprime(i)){
+                        primes.add(i);
+                    }
+                    while(n%i==0){
+                        n/=i;
+                    }
+                }
+            }
+            if(n > 1){ 
+                primes.add(n);
+            }
+        }
+        return primes.size();
+    }
+}
