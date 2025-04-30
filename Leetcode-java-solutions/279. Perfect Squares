@@ -1,0 +1,22 @@
+class Solution{
+    int dp[];
+    public int numSquares(int n){
+        dp=new int[n+1];
+        Arrays.fill(dp,-1);
+        return solve(n);
+    }
+    public int solve(int num){
+        if(num<=0){
+            return 0;
+        }
+        if(dp[num]!=-1){
+            return dp[num];
+        }
+        int min=1000000;
+        for(int i=1;i*i<=num;i++){
+            int op1=1+solve(num-i*i);
+            min=Math.min(op1,min);
+        }
+        return dp[num]=min;
+    }
+}
