@@ -1,0 +1,26 @@
+class Solution{
+    public int[] intersect(int[] nums1,int[] nums2){
+        Map<Integer,Integer>mpp1=new HashMap<>();
+        Map<Integer,Integer>mpp2=new HashMap<>();
+        for(int i=0;i<nums1.length;i++){
+            mpp1.put(nums1[i],mpp1.getOrDefault(nums1[i],0)+1);
+        }
+        for(int i=0;i<nums2.length;i++){
+            mpp2.put(nums2[i],mpp2.getOrDefault(nums2[i],0)+1);
+        }
+        List<Integer>list=new ArrayList<>();
+        for(int key:mpp1.keySet()){
+            if(mpp2.containsKey(key)){
+                int freq=Math.min(mpp1.get(key),mpp2.get(key));
+                for(int i=0;i<freq;i++){
+                    list.add(key);
+                }
+            }
+        }
+        int array[]=new int[list.size()];
+        for(int i=0;i<list.size();i++){
+            array[i]=list.get(i);
+        }
+        return array;
+    }
+}
