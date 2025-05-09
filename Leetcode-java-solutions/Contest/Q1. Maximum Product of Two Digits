@@ -1,0 +1,14 @@
+class Solution{
+    public int maxProduct(int n){
+        String str=n+"";
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<str.length()-1;i++){
+            int mul=str.charAt(i)-'0';
+            for(int j=i+1;j<str.length();j++){
+                int mull=mul*(str.charAt(j)-'0');
+                max=Math.max(max,mull);
+            }
+        }
+        return max;
+    }
+}
