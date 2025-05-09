@@ -1,0 +1,16 @@
+class Solution{
+    public int countEven(int num){
+        int count=0;
+        for(int i=2;i<=num;i++){
+            String str=Integer.toString(i);
+            int dig=0;
+            for(int j=0;j<str.length();j++){
+                dig+=str.charAt(j)-'0';
+            }
+            if(dig%2==0){
+                count++;
+            }
+        }
+        return count;
+    }
+}
