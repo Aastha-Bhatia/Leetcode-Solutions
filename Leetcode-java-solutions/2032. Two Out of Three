@@ -23,7 +23,7 @@ class Solution{
             freq.put(num,freq.getOrDefault(num,0)+1);
         }
         List<Integer> result=new ArrayList<>();
-        for(int key:freq.keySet()){
+        for(int key:freq.keySet()){ 
             if(freq.get(key)>=2){
                 result.add(key);
             }
