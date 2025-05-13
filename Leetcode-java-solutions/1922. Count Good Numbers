@@ -1,0 +1,28 @@
+class Solution{
+    public static int MOD=1_000_000_007;
+    public int countGoodNumbers(long n){
+        long odd=n/2;
+        long even=(n/2)+(n%2);
+        long oddposs=power(4,odd);
+        long evenposs=power(5,even);
+        return (int)((oddposs*evenposs)%MOD);
+    }
+    public static long power(long n,long pow){
+        if(n==0 || n==1){
+            return n;
+        }
+        long ans=1;
+        while(pow>0){
+            // if pow is even
+            if(pow%2==0){
+                n=(n*n)%MOD;
+                pow=pow/2;
+            }
+            else{
+                pow=pow-1;
+                ans=(ans*n)%MOD;
+            }
+        }
+        return ans;
+    }
+}
