@@ -1,0 +1,27 @@
+class Solution{
+    public String[] findWords(String[] words){
+        String one="qwertyuiopQWERTYUIOP";
+        String two="asdfghjklASDFGHJKL";
+        String three="zxcvbnmZXCVBNM";
+        List<String> ans=new ArrayList<>();
+        for(String word:words){
+            boolean inrow1=true, inrow2=true, inrow3=true;
+            for(int j=0;j<word.length();j++){
+                char c=word.charAt(j);
+                if(!one.contains(String.valueOf(c))){
+                    inrow1=false;
+                }
+                if(!two.contains(String.valueOf(c))){
+                    inrow2=false;
+                }
+                if(!three.contains(String.valueOf(c))){
+                    inrow3=false;
+                }
+            }
+            if(inrow1||inrow2||inrow3){
+                ans.add(word);
+            }
+        }
+        return ans.toArray(new String[0]);
+    }
+}
