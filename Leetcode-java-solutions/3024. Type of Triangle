@@ -1,25 +1,22 @@
-class Solution {
+class Solution{
     public String triangleType(int[] nums){
-        int a=nums[0];
-        int b=nums[1];
-        int c=nums[2];
+        int sum=nums[0]+nums[1]+nums[2];
         boolean isvalid=false;
-        if(a+b>c && b+c>a && c+a>b){
+        if(nums[0]+nums[1]>nums[2] && nums[0]+nums[2]>nums[1] && nums[1]+nums[2]>nums[0]){
             isvalid=true;
-        }   
+        }
         if(isvalid==false){
             return "none";
-        } 
-        else{
-            if(a==b && a==c){
-                return "equilateral";
-            }
-            else if((a==b && a!=c)||(a==c && a!=b)||(b==c && b!=a)){
-                return "isosceles";
-            }
-            else{
-                return "scalene";
-            }
         }
+        if(nums[0]==nums[1] && nums[1]==nums[2]){
+            return "equilateral";
+        }
+        if((nums[0]==nums[1] && nums[1]!=nums[2])||(nums[0]==nums[2] && nums[1]!=nums[2])||(nums[1]==nums[2] && nums[0]!=nums[1])){
+            return "isosceles";
+        }
+        if(nums[0]!=nums[1] && nums[1]!=nums[2] && nums[0]!=nums[2]){
+            return "scalene";
+        }
+        return "none";
     }
 }
