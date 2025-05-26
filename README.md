@@ -1,5 +1,5 @@
 # Leetcode-cpp-solutions
-This repository contains the solutions of Leetcode questions solved by me on daily/ regular basis. 
+This repository contains the solutions of Leetcode questions solved by me on daily/regular basis. 
 
 This is my Leetcode profile :- https://leetcode.com/u/aastha-bhatia/
 
