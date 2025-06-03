@@ -1,20 +1,20 @@
 class Solution{
-    public int calculate_ncr(int n,int r){
-        int ans=1;
+    public int generate_ncr(int n,int r){
+        int sum=1;
         for(int i=0;i<r;i++){
-            ans=ans*(n-i);
-            ans=ans/(i+1);
+            sum=sum*(n-i);
+            sum=sum/(i+1);
         }
-        return ans;
+        return sum;
     }
     public List<List<Integer>> generate(int numRows){
-        List<List<Integer>>mainlist=new ArrayList<>();
+        List<List<Integer>> mainlist=new ArrayList<>();
         for(int i=1;i<=numRows;i++){
-            List<Integer>seclist=new ArrayList<>();
+            List<Integer> list=new ArrayList<>();
             for(int j=1;j<=i;j++){
-                seclist.add(calculate_ncr(i-1,j-1));
+                list.add(generate_ncr(i-1,j-1));
             }
-            mainlist.add(seclist);
+            mainlist.add(list);
         }
         return mainlist;
     }
