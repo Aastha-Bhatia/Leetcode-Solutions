@@ -1,16 +1,17 @@
-class Solution {
-    public List<Integer> majorityElement(int[] nums) {
-        List<Integer> ans=new ArrayList<>();
-        HashMap<Integer,Integer> mp=new HashMap<>();
+class Solution{
+    public List<Integer> majorityElement(int[] nums){
+        List<Integer>list=new ArrayList<>();
+        int target=(int)(nums.length/3)+1;
+        HashMap<Integer,Integer> mpp=new HashMap<>();
         for(int i=0;i<nums.length;i++){
-            int count=mp.getOrDefault(nums[i],0);
-            mp.put(nums[i],count+1); 
-        }
-        for(Map.Entry<Integer,Integer> it:mp.entrySet()){
-            if(it.getValue()>nums.length/3){
-                ans.add(it.getKey());
+            mpp.put(nums[i],mpp.getOrDefault(nums[i],0)+1);
+            if(mpp.get(nums[i])==target){
+                list.add(nums[i]);
+            }
+            if(list.size()==2){
+                break;
             }
         }
-        return ans;
+        return list;
     }
 }
