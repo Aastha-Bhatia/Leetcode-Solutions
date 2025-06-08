@@ -3,7 +3,7 @@ This repository contains the solutions of Leetcode questions solved by me on dai
 
 This is my Leetcode profile :- https://leetcode.com/u/aastha-bhatia/
 
-Usually, I do Leetcode using Java language only. So, https://github.com/Aastha-Bhatia/Leetcode-Solutions/tree/main/Leetcode-java-solutions has more solutions and may help you more. 
+Usually, I do Leetcode using Java language. So, https://github.com/Aastha-Bhatia/Leetcode-Solutions/tree/main/Leetcode-java-solutions has more solutions and may help you more. 
 
 However, there are some solutions in C++ language also https://github.com/Aastha-Bhatia/Leetcode-Solutions/tree/main/Leetcode-java-solutions/Leetcode-cpp-solutions which may help you :)
 
