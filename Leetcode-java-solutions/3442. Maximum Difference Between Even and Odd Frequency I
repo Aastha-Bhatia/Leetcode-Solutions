@@ -1,0 +1,26 @@
+class Solution{
+    public int maxDifference(String s){
+        HashMap<Character,Integer>mpp=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            mpp.put(s.charAt(i),mpp.getOrDefault(s.charAt(i),0)+1);
+        }
+        int maxodd=0;
+        int mineven=Integer.MAX_VALUE;
+        int max=0;
+        for(char c:mpp.keySet()){
+            int value=mpp.get(c);
+            // odd
+            if(value%2!=0){
+                maxodd=Math.max(maxodd,value);
+            }
+            // evem
+            else{
+                mineven=Math.min(mineven,value);
+            }
+        }
+        if(mineven==Integer.MAX_VALUE){
+            return -1; 
+        }
+        return maxodd-mineven;
+    }
+}
