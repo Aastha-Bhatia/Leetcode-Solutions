@@ -1,0 +1,29 @@
+class Solution{
+    public int[][] merge(int[][] intervals){
+        List<int[]>list=new ArrayList<>();
+        int n=intervals.length;
+        Arrays.sort(intervals,(a,b)->Integer.compare(a[0],b[0]));
+        int ans[]=new int[]{intervals[0][0],intervals[0][1]};
+        for(int i=1;i<n;i++){
+            // overlapping
+            if(intervals[i][0]<=ans[1]){
+                ans[1]=Math.max(ans[1],intervals[i][1]);
+            }
+            else{
+                // found whatever i could..
+                list.add(new int[]{ans[0],ans[1]});
+                ans[0]=intervals[i][0];
+                ans[1]=intervals[i][1];
+            }
+        }
+        // adding last element..
+        list.add(new int[]{ans[0],ans[1]});
+        int anss[][]=new int[list.size()][2];
+        for(int i=0;i<list.size();i++){
+            int value[]=list.get(i);
+            anss[i][0]=value[0];
+            anss[i][1]=value[1];
+        }
+        return anss;
+    }
+}
