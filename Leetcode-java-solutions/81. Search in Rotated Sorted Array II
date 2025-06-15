@@ -1,9 +1,39 @@
-class Solution {
-    public boolean search(int[] nums, int target) {
-        for(int i=0;i<nums.length;i++){
-            if(nums[i]==target){
+class Solution{
+    public boolean search(int[] nums,int target){
+        int start=0;
+        int end=nums.length-1;
+        while(start<=end){
+            int mid=(start+end)/2;
+            if(nums[mid]==target){
                 return true;
             }
+            if(nums[start]==nums[mid] && nums[start]==nums[end]){
+                start++;
+                end--;
+                continue;
+            }
+            // left is sorted
+            else if(nums[start]<=nums[mid]){
+                // it comes within left portion..
+                if(target>=nums[start] && target<=nums[mid]){
+                    // we will eliminate right..
+                    end=mid-1;
+                }
+                else{
+                    start=mid+1;
+                }
+            }
+            // right is sorted
+            else{
+                if(target>=nums[mid] && target<=nums[end]){
+                    // it comes within the right part..
+                    // eliminating left part
+                    start=mid+1;
+                }
+                else{
+                    end=mid-1;
+                }
+            }  
         }
         return false;
     }
