@@ -1,22 +1,22 @@
 class Solution{
     public int mySqrt(int x){
-        // any numbers sqrt can be between 1 to the number...
-        // so we can use binary search in it..
+        if(x==0){
+            return 0;
+        }
         int start=1;
         int end=x;
+        int ans=1;
         while(start<=end){
             int mid=start+(end-start)/2;
             long mul=(long)mid*mid;
-            if(mul==x){
-                return mid;
-            }
-            else if(mul>x){
-                end=mid-1;
-            }
-            else{
+            if(mul<=x){
+                ans=mid;
                 start=mid+1;
             }
+            else{
+                end=mid-1;
+            }
         }
-        return end;
+        return ans;
     }
 }
