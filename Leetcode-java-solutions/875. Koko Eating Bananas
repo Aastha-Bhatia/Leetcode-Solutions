@@ -1,36 +1,19 @@
 class Solution{
-    public boolean ispossible(int piles[],int h,int i){
-        int total=0;
-        for(int j=0;j<piles.length;j++){
-            if(piles[j]%i!=0){
-                // then we need to add 1 to it surely
-                total+=(piles[j]/i)+1;
-            }
-            else{
-                total+=piles[j]/i;
-            }
-            if(total>h){
-                return false;
-            }
-        }
-        if(total<=h){
-            return true;
-        }
-        return true;
-    }
-    public int minEatingSpeed(int[] piles, int h){
-        int max=0;
+    public int minEatingSpeed(int[] piles,int h){
+        int max=Integer.MIN_VALUE;
         for(int i=0;i<piles.length;i++){
-            max=Math.max(piles[i],max);
+            max=Math.max(max,piles[i]);
         }
-        // using binary search
         int start=1;
         int end=max;
         int ans=-1;
         while(start<=end){
-            // as max can be large...
             int mid=start+(end-start)/2;
-            if(ispossible(piles,h,mid)){
+            int totalhours=0;
+            for(int i=0;i<piles.length;i++){
+                totalhours+=Math.ceil((double)piles[i]/mid);
+            }
+            if(totalhours<=h){
                 ans=mid;
                 end=mid-1;
             }
