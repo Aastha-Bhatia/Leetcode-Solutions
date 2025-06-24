@@ -1,0 +1,27 @@
+class Solution{
+    public int minSetSize(int[] arr){
+        int half=arr.length/2;
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++){
+            max=Math.max(max,arr[i]);
+        }   
+        int nums[]=new int[max+1];
+        for(int i=0;i<arr.length;i++){
+            nums[arr[i]]++;
+        }
+        // [0,0,2,4,0,3,0,1]
+        Arrays.sort(nums);
+        // [0,0,0,0,1,2,3,4]
+        // traversing from back for better..
+        int sum=0;
+        int count=0;
+        for(int i=nums.length-1;i>=0;i--){
+            if(sum>=half){
+                return count;
+            }
+            sum+=nums[i];
+            count++;
+        }
+        return count;
+    }
+}
