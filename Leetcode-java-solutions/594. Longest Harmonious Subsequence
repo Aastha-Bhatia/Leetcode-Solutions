@@ -1,0 +1,16 @@
+// logic- we need 1 as diff, so we will check how many elements are 1 greater than current element, and we will return sum of current element occuring number of times + sum of curr element +1 occuring number of times...
+class Solution{
+    public int findLHS(int[] nums){
+        HashMap<Integer,Integer>mpp=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            mpp.put(nums[i],mpp.getOrDefault(nums[i],0)+1);
+        }
+        int ans=0;
+        for(int key:mpp.keySet()){
+            if(mpp.containsKey(key+1)){
+                ans=Math.max(ans,mpp.get(key)+mpp.get(key+1));
+            }
+        }
+        return ans;
+    }
+}
