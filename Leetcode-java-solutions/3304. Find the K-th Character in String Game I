@@ -1,0 +1,17 @@
+class Solution{
+    public char kthCharacter(int k){
+        StringBuilder sb=new StringBuilder("a");
+        while(sb.length()<k){
+            // a
+            String str=sb.toString();
+            StringBuilder temp=new StringBuilder();
+            // bccd
+            for(int i=0;i<str.length();i++){
+                temp.append((char)((str.charAt(i)-'a'+1)+'a'));
+            }
+            sb.append(temp.toString());
+        }
+        String finalstr=sb.toString();
+        return sb.charAt(k-1);
+    }
+}
