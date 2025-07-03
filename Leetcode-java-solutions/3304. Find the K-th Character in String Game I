@@ -5,10 +5,11 @@ class Solution{
             // a
             String str=sb.toString();
             StringBuilder temp=new StringBuilder();
-            // bccd
+            // b
             for(int i=0;i<str.length();i++){
                 temp.append((char)((str.charAt(i)-'a'+1)+'a'));
             }
+            // ab
             sb.append(temp.toString());
         }
         String finalstr=sb.toString();
