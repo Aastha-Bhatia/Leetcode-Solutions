@@ -1,0 +1,26 @@
+class Solution{
+    public char kthCharacter(long k,int[] operations){
+        StringBuilder sb=new StringBuilder("a");
+        for(int i=0;i<operations.length;i++){
+            // a
+            String str=sb.toString();
+            StringBuilder temp=new StringBuilder();
+            if(operations[i]==1){
+                // b
+                for(int j=0;j<str.length();j++){
+                    temp.append((char)((str.charAt(j)-'a'+1)+'a'));
+                }
+                // ab
+                sb.append(temp.toString());
+            }
+            else{
+                sb.append(str);
+            }
+            if(sb.length()>=(int)k){
+                break;
+            }
+        }
+        String finalstr=sb.toString();
+        return sb.charAt((int)k-1);
+    }
+}
