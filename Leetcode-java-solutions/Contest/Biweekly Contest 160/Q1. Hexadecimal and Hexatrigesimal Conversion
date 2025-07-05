@@ -1,0 +1,9 @@
+class Solution{
+    public String concatHex36(int n){
+        int sq=n*n;
+        String hexString1=Integer.toString(sq,16);
+        int cube=n*n*n;
+        String hexString2=Integer.toString(cube,36);
+        return (""+hexString1+hexString2).toUpperCase();
+    }
+}©leetcode
