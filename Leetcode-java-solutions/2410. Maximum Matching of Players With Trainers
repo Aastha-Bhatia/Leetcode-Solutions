@@ -1,0 +1,22 @@
+class Solution{
+    public int matchPlayersAndTrainers(int[] players,int[] trainers){
+        Arrays.sort(players);
+        Arrays.sort(trainers);
+        // 4 7 9
+        // 2 5 8 8 
+        int start=players.length-1;
+        int last=trainers.length-1;
+        int count=0;
+        while(last>=0 && start>=0){
+            if(players[start]<=trainers[last]){
+                count++;
+                start--;
+                last--;
+            }
+            else{
+                start--;
+            }
+        }
+        return count;
+    }
+}
