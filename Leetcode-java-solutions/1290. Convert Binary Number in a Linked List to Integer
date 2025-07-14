@@ -10,22 +10,21 @@
  */
 class Solution{
     public int getDecimalValue(ListNode head){
-        int ans=0;
         ListNode temp=head;
+        int number=0;
         while(temp!=null){
-            ans=ans*10+temp.val;
+            number=number*10+temp.val;
             temp=temp.next;
         }
-        // we will get our number 
-        // now converting binary to decimal
-        int power=0;
-        int finalans=0;
-        while(ans>0){
-            int last=ans%10;
-            finalans+=last*Math.pow(2,power);
-            power++;
-            ans=ans/10;
+        // number to binary
+        int pow=0;
+        int ans=0;
+        while(number>0){
+            int last=number%10;
+            ans+=last*Math.pow(2,pow);
+            number/=10;
+            pow++;
         }
-        return finalans;
+        return ans;
     }
 }
