@@ -1,0 +1,20 @@
+class Solution{
+    public int[] singleNumber(int[] nums){
+        Map<Integer,Integer> mpp=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            mpp.put(nums[i],mpp.getOrDefault(nums[i],0)+1);
+        }
+        int start=0;
+        int arr[]=new int[2];
+        for(Map.Entry<Integer,Integer> entry:mpp.entrySet()){
+            if(start==2){
+                break;
+            }
+            if(entry.getValue()==1){
+                arr[start]=entry.getKey();
+                start++;
+            }
+        }
+        return arr;
+    }
+}
