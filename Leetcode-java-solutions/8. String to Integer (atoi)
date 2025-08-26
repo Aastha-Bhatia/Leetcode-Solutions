@@ -1,61 +1,44 @@
-// simple solution using loops:-
-class Solution {
-    public int myAtoi(String s) {
+class Solution{
+    public int myAtoi(String s){
         s=s.trim();
+        if(s==null || s.length()==0){
+            return 0;
+        }
         int sign=1;
-        if(s.length()==0)return 0;
         int i=0;
-        if(s.charAt(i)=='-'){
+        // sign..
+        if(s.charAt(i) =='+'){
+            i++;
+        }
+        else if(s.charAt(i)=='-'){
+            i++;
             sign=-1;
-            i++;
         }
-        else if(s.charAt(i)=='+'){
-            sign=1;
-            i++;
-        }
+        // leading zeros..
         while(i<s.length() && s.charAt(i)=='0'){
             i++;
         }
-        long result=0;
-        for(int j=i;j<s.length() && Character.isDigit(s.charAt(i));j++){
-            result=result*10+s.charAt(i)-'0';
-            if(result>Integer.MAX_VALUE){
-                return sign==1?Integer.MAX_VALUE:Integer.MIN_VALUE;
+        long num=0;
+        while(i<s.length()){
+            char character=s.charAt(i);
+            if(character>='0' && character<='9'){
+                int digit=character-'0';
+                num=num*10+digit;
+                if(num>Integer.MAX_VALUE){
+                    return sign==-1?Integer.MIN_VALUE:Integer.MAX_VALUE;
+                }
+                if(num<Integer.MIN_VALUE){
+                    return sign==-1?Integer.MAX_VALUE:Integer.MIN_VALUE;
+                }
+            }
+            else{
+                break;
             }
             i++;
         }
-        return (int)result*sign;
-    }
-}
-
-// using recursion:-
-class Solution{
-    int max=Integer.MAX_VALUE;
-    int min=Integer.MIN_VALUE;
-    public int myAtoi(String s){
-        // removing trailing and leading spaces...
-        s=s.trim();
-        return solve(s,0,0,1);
-    }
-    public int solve(String s,int ind,int res,int sign){
-        // if we reach end...
-        if(ind>=s.length()){
-            return res*sign;
+        if(sign==-1){
+            return (int)-num;
         }
-        // if sign..
-        char ch=s.charAt(ind);
-        if(ind==0 && (ch=='+'||ch=='-')){
-            return solve(s,ind+1,res,ch=='-'?-1:1);
-        }
-        // invalid..
-        if(!Character.isDigit(ch)){
-            return res*sign;
-        }
-        // if valid...
-        int digit=ch-'0';
-        if((long)res*10+digit>max){
-            return sign==1?max:min;
-        }
-        return solve(s,ind+1,res*10+digit,sign);
+        return (int)num;
     }
 }
