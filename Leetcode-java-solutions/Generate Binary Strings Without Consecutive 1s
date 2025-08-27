@@ -1,0 +1,25 @@
+class Solution{
+    public static void generate(int index,int n,int lastDigit,StringBuilder sb,List<String> list){
+        if(index==n){
+            list.add(sb.toString());
+            return;
+        }
+        if(lastDigit==0){
+            generate(index+1,n,0,sb.append("0"),list);
+            sb.deleteCharAt(sb.length()-1);
+            generate(index+1,n,1,sb.append("1"),list);
+            sb.deleteCharAt(sb.length()-1);
+        }
+        else{
+            generate(index+1,n,0,sb.append("0"),list);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+    public List<String> generateBinaryStrings(int n){
+        List<String> list=new ArrayList<>();
+        StringBuilder sb=new StringBuilder();
+        // (size,0)
+        generate(0,n,0,sb,list);
+        return list;
+    }
+}
