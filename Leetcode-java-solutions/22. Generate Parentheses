@@ -1,21 +1,22 @@
 class Solution{
-    List<String> ans=new ArrayList<>();
-    public List<String> generateParenthesis(int n){
-        gp(n,"",0,0);
-        return ans;
-    }
-    public void gp(int n,String curr,int o,int c){
-        // base condition...
-        if(o==n && c==n){
-            ans.add(curr);
+    public void generate(int n,String s,List<String> list,int opening,int closing){
+        // base case.. 
+        if(opening==n && closing==n){
+            list.add(s);
             return;
         }
-        // we have 2 possibilies- adding '(' || ')'
-        if(o<n){
-            gp(n,curr+"(",o+1,c);
+        // we have 2 possibilies- adding "(" or ")"
+        if(opening<n){
+            generate(n,s+"(",list,opening+1,closing);
         }
-        if(o>c && c<n){
-            gp(n,curr+")",o,c+1);
+        if(closing<opening && closing<n){
+            generate(n,s+")",list,opening,closing+1);
         }
+    }
+    public List<String> generateParenthesis(int n){
+        List<String> list=new ArrayList<>();
+        String s="";
+        generate(n,s,list,0,0);
+        return list;
     }
 }
