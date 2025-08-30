@@ -1,0 +1,20 @@
+class Solution{
+    public int largestPerimeter(int[] nums){
+        Arrays.sort(nums);
+        // 1 2 2
+        int per=0;
+        for(int i=nums.length-1;i>=0;i--){
+            for(int j=i-1;j>=0;j--){
+                for(int k=j-1;k>=0;k--){
+                    // sum of 2 sides > third side
+                    if(nums[j]+nums[k]>nums[i]){
+                        // valid
+                        per=Math.max(per,nums[i]+nums[j]+nums[k]);
+                        return per;
+                    }
+                }
+            }
+        }
+        return per;
+    }
+}
