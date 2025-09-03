@@ -13,9 +13,11 @@ class Solution{
         for(int i=0;i<arr1.length;i++){
             if(!list.contains(arr1[i])){
                 remaining.add(arr1[i]);
+                // 7 19
             }
         }
         Collections.sort(remaining);
+        // 7 19
         int[] newarr=new int[arr1.length];
         int j=0;
         for(int i=0;i<list.size();i++){
@@ -26,6 +28,7 @@ class Solution{
             newarr[j]=remaining.get(s);
             j++;
         }
+        // 2 2 2 1 4 3 3 9 6 7 19
         return newarr;
     }
 }
