@@ -1,0 +1,31 @@
+class Solution{
+    public int[] relativeSortArray(int[] arr1,int[] arr2){
+        List<Integer> list=new ArrayList<>();
+        for(int i=0;i<arr2.length;i++){
+            for(int j=0;j<arr1.length;j++){
+                if(arr1[j]==arr2[i]){
+                    list.add(arr1[j]);
+                    // 2 2 2 1 4 3 3 9 6
+                }
+            }
+        }
+        List<Integer> remaining=new ArrayList<>();
+        for(int i=0;i<arr1.length;i++){
+            if(!list.contains(arr1[i])){
+                remaining.add(arr1[i]);
+            }
+        }
+        Collections.sort(remaining);
+        int[] newarr=new int[arr1.length];
+        int j=0;
+        for(int i=0;i<list.size();i++){
+            newarr[j]=list.get(i);
+            j++;
+        }
+        for(int s=0;s<remaining.size();s++){
+            newarr[j]=remaining.get(s);
+            j++;
+        }
+        return newarr;
+    }
+}
