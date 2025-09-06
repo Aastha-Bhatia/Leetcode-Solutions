@@ -1,0 +1,24 @@
+class Solution{
+    public int[] arrayRankTransform(int[] arr){
+        int arr2[]=new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            arr2[i]=arr[i];
+        }
+        Arrays.sort(arr2);
+        // arr- 40 10 20 30
+        // arr2- 10 20 30 40
+        // arr- 1 2 3 4
+        Map<Integer,Integer> mpp=new HashMap<>();
+        int rank=1;
+        for(int num:arr2){
+            if(!mpp.containsKey(num)){
+                mpp.put(num,rank);
+                rank++;
+            }
+        }
+        for(int i=0;i<arr.length;i++){
+            arr[i]=mpp.get(arr[i]);
+        }
+        return arr;
+    }
+}
