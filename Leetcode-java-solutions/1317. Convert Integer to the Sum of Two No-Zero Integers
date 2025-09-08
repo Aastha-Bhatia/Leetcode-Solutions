@@ -1,0 +1,11 @@
+class Solution{
+    public int[] getNoZeroIntegers(int n){
+        int s=1;
+        int e=n-1;
+        while((s+"").contains("0")||(e+"").contains("0")){
+            s++;
+            e--;
+        }
+        return new int[]{s,e};
+    }
+}
