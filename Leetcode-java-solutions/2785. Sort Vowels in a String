@@ -1,0 +1,25 @@
+class Solution{
+    public String sortVowels(String s){
+        List<Character> list=new ArrayList<>();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='a'||s.charAt(i)=='e'||s.charAt(i)=='i'||s.charAt(i)=='o'||s.charAt(i)=='u'||s.charAt(i)=='A'||s.charAt(i)=='E'||s.charAt(i)=='I'||s.charAt(i)=='O'||s.charAt(i)=='U'){
+                list.add(s.charAt(i));
+            }
+        }
+        Collections.sort(list);
+        int index=0;
+        String newstring="";
+        for(int i=0;i<s.length();i++){
+            // if vowel
+            if(s.charAt(i)=='a'||s.charAt(i)=='e'||s.charAt(i)=='i'||s.charAt(i)=='o'||s.charAt(i)=='u'||s.charAt(i)=='A'||s.charAt(i)=='E'||s.charAt(i)=='I'||s.charAt(i)=='O'||s.charAt(i)=='U'){
+                newstring+=list.get(index);
+                index++;
+            }
+            // if consonant
+            else{
+                newstring+=s.charAt(i);
+            }
+        }
+        return newstring;
+    }
+}
