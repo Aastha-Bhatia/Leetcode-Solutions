@@ -1,0 +1,23 @@
+class Solution{
+    public int maxFreqSum(String s){
+        HashMap<Character,Integer> mpp=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            mpp.put(s.charAt(i),mpp.getOrDefault(s.charAt(i),0)+1);
+        }
+        int maxvowel=0;
+        int maxconsonent=0;
+        for(Map.Entry<Character,Integer>entry:mpp.entrySet()){
+            if(entry.getKey()=='a'||entry.getKey()=='e'||entry.getKey()=='i'||entry.getKey()=='o'||entry.getKey()=='u'){
+                if(entry.getValue()>maxvowel){
+                    maxvowel=entry.getValue();
+                }
+            }
+            else{
+                if(entry.getValue()>maxconsonent){
+                    maxconsonent=entry.getValue();
+                }
+            }
+        }
+        return maxvowel+maxconsonent;
+    }
+}
