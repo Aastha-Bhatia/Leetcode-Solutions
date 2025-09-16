@@ -1,0 +1,43 @@
+class Solution{
+    public int gcd(int a,int b){
+        while(b!=0){
+            int temp=b;
+            b=a%b;
+            a=temp;
+        }
+        return a;
+    }
+    // lcm of a and b = a*b/gcd of a and b
+    public int lcm(int a,int b){
+        return (int)((long)a*b/gcd(a,b));
+    }
+    public List<Integer> replaceNonCoprimes(int[] nums){
+        Stack<Integer> stack=new Stack<>();
+        if(nums.length<1){
+            return new ArrayList<>();
+        }
+        stack.push(nums[0]);
+        for(int i=1;i<nums.length;i++){
+            stack.push(nums[i]);
+            while(stack.size()>1){
+                int a=stack.pop();
+                int b=stack.pop();
+                int g=gcd(a,b);
+                if(g>1){
+                    stack.push(lcm(a,b));
+                } 
+                else{
+                    stack.push(b);
+                    stack.push(a);
+                    break;
+                }
+            }
+        }
+        List<Integer> list=new ArrayList<>();
+        while(!stack.isEmpty()){
+            list.add(stack.pop());
+        }
+        Collections.reverse(list);
+        return list;
+    }
+}
