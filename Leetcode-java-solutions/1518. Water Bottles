@@ -1,0 +1,15 @@
+class Solution{
+    public int numWaterBottles(int numBottles,int numExchange){
+        if(numBottles<numExchange){
+            return numBottles;
+        }
+        int total=numBottles;
+        int empty=numBottles;
+        while(empty>=numExchange){
+            int newbottles=empty/numExchange;
+            total+=newbottles;
+            empty=newbottles+(empty%numExchange);
+        }
+        return total;
+    }
+}
