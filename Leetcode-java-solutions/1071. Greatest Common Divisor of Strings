@@ -1,0 +1,30 @@
+class Solution{
+    public String gcdOfStrings(String str1,String str2){
+        StringBuilder sb=new StringBuilder();
+        // if i concatinate str1 and str2 
+        // eg. case 1: str1+str2=ABCABCABC  str2+str1=ABCABCABC 
+        // same... it means we can divide.. 
+
+        // case 2: LEETCODE: str1+str2=LEETCODE str2+str1=CODELEET 
+        // diff... it means we cannot divide... 
+
+        if((str1+str2).equals(str2+str1)){
+            // we can find the ans..
+            // gcd.. greatest common divisor that divides both str1 and str2
+            int ans=gcd(str1.length(),str2.length());
+            return str1.substring(0,ans);
+        }
+        else{
+            return "";
+        }
+    }
+    int gcd(int a,int b){
+        // gcd(b,a%b);
+        while(a%b!=0){
+            int rem=a%b;
+            a=b;
+            b=rem;
+        }
+        return b;
+    }
+}
