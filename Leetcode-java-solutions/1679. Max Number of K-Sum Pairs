@@ -1,0 +1,42 @@
+class Solution{
+    public int maxOperations(int[] nums,int k){
+        // max 2 from arr can be removed in 1 operation...
+
+        // 1 2 3 4 k=5    op=0
+        // 2 3            op=1
+        // []             op=2 
+        // ans=2 
+
+        // 3 1 3 4 3 k=6   op=0 
+        // 1 3 4           op=1 
+        // ans=1 
+
+        // if adding any 2 elements give k, remove them and count 1 operation... 
+        // if array is sorted.. 
+        // start+end>k 
+        // end --
+
+        // if s+tart+end<k 
+        // start++
+
+        int ans=-0;
+        Arrays.sort(nums);
+        int start=0;
+        int end=nums.length-1;
+        while(start<end){
+            if(nums[start]+nums[end]<k){
+                start++;
+            }
+            else if(nums[start]+nums[end]>k){
+                end--;
+            }
+            // 1 2 3 3 4 k=6 3+3==6 
+            else{
+                start++;
+                end--;
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
